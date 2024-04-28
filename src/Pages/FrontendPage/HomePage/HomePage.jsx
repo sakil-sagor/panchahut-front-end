@@ -1,7 +1,11 @@
-import React from "react";
+import CreateProduct from "../../../Components/DashboardComponent/CreateProduct";
 
 const HomePage = () => {
-  return <div>this is home page</div>;
+  return (
+    <div>
+      <CreateProduct></CreateProduct>
+    </div>
+  );
 };
 
 export default HomePage;
