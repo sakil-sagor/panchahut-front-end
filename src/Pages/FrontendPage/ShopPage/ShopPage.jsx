@@ -5,6 +5,8 @@ const ShopPage = () => {
     <div>
       this is shop page
       <h1>This also a shp page</h1>
+      <h1>This also a shp page</h1>
+      <h1>This also a shp page</h1>
     </div>
   );
 };
