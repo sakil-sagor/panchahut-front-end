@@ -4,7 +4,7 @@ const ShopPage = () => {
   return (
     <div>
       this is shop page
-      <h1>This also a shp page</h1>
+      <p>deleted shp and added new</p>
     </div>
   );
 };
