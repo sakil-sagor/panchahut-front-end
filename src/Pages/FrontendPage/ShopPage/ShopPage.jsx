@@ -10,6 +10,7 @@ const ShopPage = () => {
           <p>hello</p>
         </from>
       </div>
+      <div>hello 2</div>
     </div>
   );
 };
