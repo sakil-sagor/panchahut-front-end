@@ -5,6 +5,8 @@ const ShopPage = () => {
     <div>
       this is shop page
       <p>deleted shp and added new</p>
+      <p>deleted shp and added new</p>
+      <p>deleted shp and added new</p>
     </div>
   );
 };
