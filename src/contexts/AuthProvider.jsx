@@ -19,8 +19,8 @@ const AuthProvider = ({ children }) => {
               withCredentials: true,
             }
           );
-
-          setUser(response?.data?.data);
+          console.log(response?.data);
+          setUser(response?.data);
           setLoading(false);
         } catch (error) {
           console.error("Error fetching user data:", error);
