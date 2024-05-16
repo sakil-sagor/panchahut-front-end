@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "../../../Context/AuthProvider";
-import blue from "../../../assets/blue.gif";
+import blue from "../../assets/blue.gif";
 
 const CreateProduct = () => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [tags, setTags] = useState([]);

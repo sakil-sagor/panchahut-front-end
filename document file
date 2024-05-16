@@ -18,10 +18,22 @@ product:{
  "available":"available,sold-out",
  "featured":"true,false",
  "status":"active,pending",
+}
 
-
-
-
+user:{
+    "id":1001,
+    "userName":"asdkfmasldkjf",
+    "fatherName":"asdkjfasdkjf",
+    "phone":"asdkjfasdkjf",
+    "email":"asdkjfasdkjf",
+    "Village/Area":"asdkjfasdkjf",          
+    "Upizilla":"asdkjfasdkjf",          
+    "Zilla":"asdkjfasdkjf",          
+    "status":"pending/verified",
+    
+              
+        
+      
 }
 
 
