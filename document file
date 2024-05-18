@@ -3,22 +3,29 @@ product:{
     "productName":"asdkfmasldkjf",
     "description":"asdkjfasdkjf",
     "brandName":"asdkjfasdkjf",          
-        
-      
     "category":"asdkjfasdkjf",
     "subCategory":"asdkjfasdkjf",
-    "costingPrice":2000,
-    "sellignPrice":2500,
-    "discount":0%,
     "productImage":"kasdf",
-    "adminName":"asdkjfasdkjf",  
  "weight":25, N/A,
  "weightUnit":"kg,liter,pice",
- "quantity":100,
+
+      "adminName":"asdkjfasdkjf",  
+  "costingPrice":2000,
+    "sellignPrice":2500,
+    "discount":0%,
+     "quantity":100,
  "available":"available,sold-out",
  "featured":"true,false",
- "status":"active,pending",
+ "status":"active,pending,stock",
 }
+
+
+
+
+
+
+
+
 
 user:{
     "id":1001,
@@ -30,6 +37,7 @@ user:{
     "Upizilla":"asdkjfasdkjf",          
     "Zilla":"asdkjfasdkjf",          
     "status":"pending/verified",
+    "role":"user/admin/supar-admin"
     
               
         

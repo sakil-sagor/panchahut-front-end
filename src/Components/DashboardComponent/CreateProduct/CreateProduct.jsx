@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import blue from "../../assets/blue.gif";
+import blue from "../../../assets/blue.gif";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const CreateProduct = () => {
-  // const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [tags, setTags] = useState([]);
@@ -122,18 +123,13 @@ const CreateProduct = () => {
   };
   return (
     <div className="bg-sky-50 min-h-screen">
-      <div className=" pt-4  pb-24 ">
-        <div className="w-full md:w-3/4  m-auto pt-12">
+      <div className="   pb-24 ">
+        <div className="  ">
           <div className="bg-sky-50 ">
             <div className=" ">
-              <div className=" border shadow-md shadow-blue-300 px-2 py-6 md:p-8 text-center rounded-md">
-                <h2 className="text-2xl font-bold text-blue-700">
-                  Add Product Detials
-                </h2>
-              </div>
-              <div className=" mt-4 ">
+              <div className=" m-4 ">
                 <form
-                  className=" border shadow-xl shadow-blue-300 px-2 py-6 md:p-8 rounded-md"
+                  className=" border shadow-xl shadow-blue-300 p-2  rounded-md"
                   onSubmit={handleSubmit}
                 >
                   <div className="flex items-end justify-between">

@@ -31,9 +31,15 @@ const Navbar = () => {
     <div className="   sticky top-0 border-b shadow-lg shadow-blue-200 bg-blue-50 z-[9999]">
       <div className="py-4 container mx-auto px-2">
         <div className="flex justify-between items-center">
-          <div>
-            <h1 className="block text-4xl font-bold ami">Logo</h1>
-          </div>
+          <NavLink to="/">
+            <div className="">
+              <img
+                src="https://i.ibb.co/f9HKjy6/1.png"
+                className="w-20"
+                alt=""
+              />
+            </div>
+          </NavLink>
           <div>
             <ul className=" hidden md:flex">
               {routes.map((route) => (

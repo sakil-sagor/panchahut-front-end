@@ -4,9 +4,11 @@ import Navbar from "../Components/Shared/Navbar/Navbar";
 
 const Main = () => {
   return (
-    <div className="container mx-auto px-2">
+    <div>
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <div className=" px-2">
+        <Outlet></Outlet>
+      </div>
       <Footer></Footer>
     </div>
   );

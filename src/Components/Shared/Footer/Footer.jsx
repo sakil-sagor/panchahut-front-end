@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+import { AuthState } from "../../../contexts/AuthProvider";
 const Footer = () => {
+  const { user } = AuthState();
   return (
     <div className="bg-blue-900 pt-10  ">
       <div className="container mx-auto px-2">
@@ -8,7 +10,9 @@ const Footer = () => {
           <div className="col-sapn- ">
             <Link to="/home">
               <h1 className="text-xl font-bold text-white ">
-                <span className="text-blue-300">Demo</span> Stock Management app
+                {" "}
+                <span className="text-blue-300">Demo</span> High-School &
+                College{" "}
               </h1>
             </Link>
             <p className="py-8 text-white font-semibold">
@@ -36,7 +40,7 @@ const Footer = () => {
                   </li>
                   <li className="cursor-pointer hover:underline">History</li>
                   <li className="cursor-pointer hover:underline">
-                    Your Feadback
+                    Your Feadback{" "}
                   </li>
                 </ul>
               </Link>
@@ -46,19 +50,33 @@ const Footer = () => {
           <div className="col-sapn-6 ">
             <div className=" mt-2 text-center">
               <h3 className="text-center py-2 font-semibold text-xl text-white">
+                {" "}
                 Links
               </h3>
               <ul className="tab-list text-gray-300">
                 <li className="cursor-pointer hover:underline">
                   <Link to="/login">Login</Link>
                 </li>
+                {/* <li className="cursor-pointer hover:underline"><Link to="/login">Register</Link></li> */}
 
                 <li className="cursor-pointer hover:underline">
-                  <div>
-                    <Link className="ml-3 dashboard-name" to="/dashboard">
-                      Dashoboard
-                    </Link>
-                  </div>
+                  {user?.phone && (
+                    <div>
+                      <Link className="ml-3 dashboard-name" to="/dashboard">
+                        Dashoboard
+                      </Link>
+                      {/* <div className='dashboard '>
+
+                                                    <button className=' ml-4 ' onClick={handleDrawerToggle}>Dashoboard</button>
+
+
+                                                    <SideDrawer isOpen={isDrawerOpen} onClose={handleDrawerToggle}>
+                                                        Content of the drawer goes here 
+                                                <p>Drawer Content</p>
+                                            </SideDrawer>
+                                                </div>  */}
+                    </div>
+                  )}
                 </li>
                 <li className="cursor-pointer hover:underline">
                   <Link to="/contactUs"> About Us</Link>
@@ -78,7 +96,7 @@ const Footer = () => {
               </h1>
               <p className="text-gray-500">
                 Please feel welcome to contact our friendly reception staff with
-                any general enquiry
+                any general enquiry{" "}
               </p>
               <div className="flex  justify-start   text-gray-600 py-8 ">
                 <p>
@@ -98,15 +116,15 @@ const Footer = () => {
       {/* footer bottom  */}
       <div className="bg-gray-900">
         <p className="py-4 text-center text-sm text-gray-500">
-          All Rights Reserved© 2023
+          All Rights Reserved© 2023{" "}
           <a
             className="text-pink-500 underline"
             target="blank"
             href="https://iitpark.com/"
           >
             i-it park
-          </a>
-          Ltd.
+          </a>{" "}
+          Ltd.{" "}
         </p>
       </div>
     </div>

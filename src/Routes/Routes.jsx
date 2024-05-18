@@ -2,10 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import ViewProfile from "../Components/Shared/SideNavbar/ViewProfile";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
-import AboutPage from "../Pages/FrontendPage/AboutPage/AboutPage";
+import AddCategory from "../Pages/DashboardPage/ProductsPage/AddCategory/AddCategory";
+import AddProduct from "../Pages/DashboardPage/ProductsPage/AddProduct/AddProduct";
+import AllProducts from "../Pages/DashboardPage/ProductsPage/AllProducts/AllProducts";
+import ProductsPage from "../Pages/DashboardPage/ProductsPage/ProductsPage";
 import HomePage from "../Pages/FrontendPage/HomePage/HomePage";
 import Registration from "../Pages/FrontendPage/RegistrationPage/Registration";
-import ShopPage from "../Pages/FrontendPage/ShopPage/ShopPage";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
       //   element: <ShopPage />,
       // },
       {
-        path: "registration",
+        path: "login",
         element: <Registration></Registration>,
       },
       // {
@@ -44,11 +46,19 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard/products",
-            element: <ShopPage></ShopPage>,
+            element: <ProductsPage></ProductsPage>,
             children: [
               {
-                path: "/dashboard/products",
-                element: <AboutPage></AboutPage>,
+                path: "/dashboard/products/allproducts",
+                element: <AllProducts></AllProducts>,
+              },
+              {
+                path: "/dashboard/products/addproducts",
+                element: <AddProduct></AddProduct>,
+              },
+              {
+                path: "/dashboard/products/addcategory",
+                element: <AddCategory></AddCategory>,
               },
             ],
           },
