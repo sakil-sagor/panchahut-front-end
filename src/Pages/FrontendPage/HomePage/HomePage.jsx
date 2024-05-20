@@ -1,8 +1,8 @@
 const HomePage = () => {
   return (
-    <div className=" min-h-screen flex mt-24 items-center flex-col">
+    <div className=" min-h-scre flex my-24 items-center flex-col">
       <div>
-        <img className="" src="https://i.ibb.co/f9HKjy6/1.png" alt="" />
+        <img src="https://i.ibb.co/xjHP8DP/2.png" className="" alt="" />
       </div>
       <p className="text-orange-700 font-bold text-4xl mt-4">
         Comming Soon .....{" "}

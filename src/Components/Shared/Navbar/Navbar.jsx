@@ -8,7 +8,7 @@ import LinkBar from "./LinkBar";
 const Navbar = () => {
   const { user } = AuthState();
   const [profileState, setProfileState] = useState("Off");
-  console.log(user);
+
   const [open, setOpen] = useState(true);
   const routes = [
     { id: 1, path: "/", name: "Home" },
@@ -28,7 +28,7 @@ const Navbar = () => {
     setProfileState((state) => (state === "On" ? "Off" : "On"));
   };
   return (
-    <div className="   sticky top-0 border-b shadow-lg shadow-blue-200 bg-blue-50 z-[9999]">
+    <div className="   sticky top-0 border-b shadow-lg shadow-green-200  bg-white z-[9999]">
       <div className="py-4 container mx-auto px-2">
         <div className="flex justify-between items-center">
           <NavLink to="/">

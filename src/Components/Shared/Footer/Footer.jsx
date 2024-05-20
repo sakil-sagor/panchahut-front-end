@@ -1,130 +1,104 @@
-import { Link } from "react-router-dom";
+import { FaPhoneAlt } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import { AuthState } from "../../../contexts/AuthProvider";
+
 const Footer = () => {
   const { user } = AuthState();
   return (
-    <div className="bg-blue-900 pt-10  ">
-      <div className="container mx-auto px-2">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  full-width-all m-auto pb-8 px-2">
-          {/* left section  */}
-          <div className="col-sapn- ">
-            <Link to="/home">
-              <h1 className="text-xl font-bold text-white ">
-                {" "}
-                <span className="text-blue-300">Demo</span> High-School &
-                College{" "}
-              </h1>
-            </Link>
-            <p className="py-8 text-white font-semibold">
-              Join our free campaign and give the gift of life! Your donation
-              can save up to three lives and help those in need.Join us today
-              and help make a positive impact in your community!
-            </p>
-          </div>
-          {/* middle section */}
-          <div className="col-sapn-1 ">
-            <div className=" mt-2 text-center">
-              <h3 className="text-center py-2 font-semibold text-xl text-white">
-                Supports
-              </h3>
-              <Link to="/contactUs">
-                <ul className="tab-list text-gray-300">
-                  <li className="cursor-pointer hover:underline">
-                    Terams & Conditions
-                  </li>
-                  <li className="cursor-pointer hover:underline">
-                    Privecy Policy
-                  </li>
-                  <li className="cursor-pointer hover:underline">
-                    All Guidelines
-                  </li>
-                  <li className="cursor-pointer hover:underline">History</li>
-                  <li className="cursor-pointer hover:underline">
-                    Your Feadback{" "}
-                  </li>
-                </ul>
-              </Link>
-            </div>
-          </div>
-          {/* middle section  */}
-          <div className="col-sapn-6 ">
-            <div className=" mt-2 text-center">
-              <h3 className="text-center py-2 font-semibold text-xl text-white">
-                {" "}
-                Links
-              </h3>
+    <div className="bg-gray-900  ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 container full-width-all m-auto pb-8 px-2">
+        {/* left section  */}
+        <div className="flex justify-center ">
+          <NavLink to="/home">
+            <img
+              src="https://i.ibb.co/xjHP8DP/2.png"
+              className="w-60 "
+              alt=""
+            />
+          </NavLink>
+        </div>
+        {/* middle section */}
+        <div className="col-sapn-1 ">
+          <div className=" mt-2 text-center">
+            <h3 className="text-center py-2 font-semibold text-xl text-white">
+              Supports
+            </h3>
+            <NavLink to="/aboutUs">
               <ul className="tab-list text-gray-300">
                 <li className="cursor-pointer hover:underline">
-                  <Link to="/login">Login</Link>
-                </li>
-                {/* <li className="cursor-pointer hover:underline"><Link to="/login">Register</Link></li> */}
-
-                <li className="cursor-pointer hover:underline">
-                  {user?.phone && (
-                    <div>
-                      <Link className="ml-3 dashboard-name" to="/dashboard">
-                        Dashoboard
-                      </Link>
-                      {/* <div className='dashboard '>
-
-                                                    <button className=' ml-4 ' onClick={handleDrawerToggle}>Dashoboard</button>
-
-
-                                                    <SideDrawer isOpen={isDrawerOpen} onClose={handleDrawerToggle}>
-                                                        Content of the drawer goes here 
-                                                <p>Drawer Content</p>
-                                            </SideDrawer>
-                                                </div>  */}
-                    </div>
-                  )}
+                  Terams & Conditions
                 </li>
                 <li className="cursor-pointer hover:underline">
-                  <Link to="/contactUs"> About Us</Link>
+                  Privecy Policy
                 </li>
                 <li className="cursor-pointer hover:underline">
-                  <Link to="/contactUs"> Contact Us</Link>
+                  All Guidelines
+                </li>
+                <li className="cursor-pointer hover:underline">History</li>
+                <li className="cursor-pointer hover:underline">
+                  Your Feadback{" "}
                 </li>
               </ul>
-            </div>
+            </NavLink>
           </div>
-          {/* right section  */}
-          <div className="col-sapn-12 ">
-            <div className="bg-indigo-200 border-l-4 border-pink-600 rounded-lg p-4">
-              <i className="fas fa-headset text-pink-700 text-6xl"></i>
-              <h1 className="text-2xl font-bold text-indigo-900 py-8">
-                Emergency Cases
-              </h1>
-              <p className="text-gray-500">
-                Please feel welcome to contact our friendly reception staff with
-                any general enquiry{" "}
+        </div>
+        {/* middle section  */}
+        <div className="col-sapn-6 ">
+          <div className=" mt-2 text-center">
+            <h3 className="text-center py-2 font-semibold text-xl text-white">
+              {" "}
+              Links
+            </h3>
+            <ul className="tab-list text-gray-300">
+              <li className="cursor-pointer hover:underline">
+                <NavLink to="/login">Login</NavLink>
+              </li>
+              <li className="cursor-pointer hover:underline">
+                <NavLink to="/login">Register</NavLink>
+              </li>
+              <li className="cursor-pointer hover:underline">
+                <NavLink to="/aboutUs"> About Us</NavLink>
+              </li>
+              <li className="cursor-pointer hover:underline">
+                <NavLink to="/contactUs"> Contact Us</NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {/* right section  */}
+        <div className="col-sapn-12 text-white">
+          <p className="text-lg font-semibold my-3">Address</p>
+          <div>
+            <p>Ukilpara Mor, Kishoreganj Sadar</p>
+          </div>
+          <br />
+          <div>
+            <h3 className="text-orange-600">Hotline:</h3>
+            <div className="flex  items-center gap-4">
+              <p>
+                <FaPhoneAlt />
               </p>
-              <div className="flex  justify-start   text-gray-600 py-8 ">
-                <p>
-                  <i className="fas fa-phone text-3xl text-pink-700  mr-4">
-                    call us-
-                  </i>
-                </p>
-                <div>
-                  <h3 className="text-lg font-bold">+8801951 411397</h3>
-                  <h3 className="text-lg font-bold">+8801712 365764</h3>
-                </div>
-              </div>
+              <p>01999 99 58 52</p>
             </div>
           </div>
         </div>
       </div>
+      <div className="grid grid-cols-2">
+        <div className="bg-pink-900 py-4"></div>
+        <div className="bg-[#14445a] py-4"></div>
+      </div>
       {/* footer bottom  */}
-      <div className="bg-gray-900">
-        <p className="py-4 text-center text-sm text-gray-500">
-          All Rights Reserved© 2023{" "}
+      <div className="bg-black">
+        <p className="py-4 text-center text-gray-500">
+          ©panchahut.com 2024, Designed & Developed by{" "}
           <a
-            className="text-pink-500 underline"
-            target="blank"
+            className="text-pink-500"
+            target="_blank"
             href="https://iitpark.com/"
+            rel="noreferrer"
           >
             i-it park
-          </a>{" "}
-          Ltd.{" "}
+          </a>
         </p>
       </div>
     </div>

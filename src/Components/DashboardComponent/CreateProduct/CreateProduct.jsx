@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import blue from "../../../assets/blue.gif";
@@ -9,22 +8,21 @@ const CreateProduct = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
-  const [tags, setTags] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     productName: "",
     description: "",
     productImage: "",
-    ownerInfo: {},
-    tags: [],
-    externalLink: "",
-    costingPrice: "",
-    offerRate: "",
-    regularPrice: "",
-    originName: "",
+    adminName: user?.fullname,
     brandName: "",
     category: "",
+    subcategory: "",
+    weight: "",
+    weightUnit: "",
+    quantity: "",
+    costingPrice: "",
+    regularPrice: "",
+    discount: "",
   });
 
   /////////////////////////
@@ -73,18 +71,12 @@ const CreateProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const ownerInfo = {
-      ownerName: user?.displayName,
-      ownerImage: user?.photoURL,
-      ownerEmail: user?.email,
-    };
+
     // Other registration form submission logic
     const imageUrl = await uploadImageToImgBB(imageFile);
     const productData = {
       ...formData,
       productImage: imageUrl,
-      ownerInfo: ownerInfo,
-      tags: tags,
     };
     console.log(productData);
     fetch("http://localhost:5000/api/v1/product/create", {
@@ -102,11 +94,8 @@ const CreateProduct = () => {
             productName: "",
             description: "",
             productImage: "",
-            ownerInfo: {},
-            tags: [],
-            externalLink: "",
             costingPrice: "",
-            offerRate: "",
+            discount: "",
             regularPrice: "",
             originName: "",
             brandName: "",
@@ -219,18 +208,18 @@ const CreateProduct = () => {
                     <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
-                        htmlFor="offerRate"
+                        htmlFor="discount"
                       >
                         Discount
                       </label>
                       <input
-                        className="py-1 block w-full px-2 rounded-md border border-gray-300"
+                        className="py-1 block w-full md:w-3/4  px-2 rounded-md border border-gray-300"
                         type="number"
                         min="0"
                         max="100"
-                        name="offerRate"
+                        name="discount"
                         placeholder="0-100 % discount"
-                        value={formData.offerRate}
+                        value={formData.discount}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -264,6 +253,87 @@ const CreateProduct = () => {
                         name="category"
                         placeholder="Category"
                         value={formData.category}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className=" mt-2">
+                      <label
+                        className=" text-gray-600 font-semibold  "
+                        htmlFor="subcategory"
+                      >
+                        Sub-Category
+                      </label>
+                      <input
+                        className="py-1 block  px-2 rounded-md border border-gray-300"
+                        type="text"
+                        name="subcategory"
+                        placeholder="Sub-Category"
+                        value={formData.subcategory}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 items-center justify-between">
+                    <div className=" mt-2">
+                      <label
+                        className=" text-gray-600 font-semibold  "
+                        htmlFor="weight"
+                      >
+                        Weight
+                      </label>
+                      <input
+                        className="py-1 block  px-2 rounded-md border border-gray-300"
+                        type="number"
+                        min="0"
+                        name="weight"
+                        placeholder="Weight"
+                        value={formData.weight}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className=" mt-2">
+                      <label
+                        className=" text-gray-600 font-semibold  "
+                        htmlFor="weightUnit"
+                      >
+                        Weight Unit
+                      </label>
+                      <select
+                        name="weightUnit"
+                        id="weightUnit"
+                        className="py-1   px-2 rounded-md border border-gray-300"
+                      >
+                        <option value="gm">gm</option>
+                        <option value="kg">Kg</option>
+                        <option value="ml">ml</option>
+                        <option value="liter">Liter</option>
+                        <option value="pice">Pice</option>
+                      </select>
+                      {/* <input
+                        className="py-1 block  px-2 rounded-md border border-gray-300"
+                        type="number"
+                        min="0"
+                        name="weightUnit"
+                        placeholder="  Weight Unit"
+                        value={formData.weightUnit}
+                        onChange={handleInputChange}
+                      /> */}
+                    </div>
+
+                    <div className=" mt-2">
+                      <label
+                        className=" text-gray-600 font-semibold  "
+                        htmlFor="quantity"
+                      >
+                        Quantity
+                      </label>
+                      <input
+                        className="py-1 block w-full md:w-3/4 px-2 rounded-md border border-gray-300"
+                        type="number"
+                        min="0"
+                        name="quantity"
+                        placeholder="0"
+                        value={formData.quantity}
                         onChange={handleInputChange}
                       />
                     </div>
