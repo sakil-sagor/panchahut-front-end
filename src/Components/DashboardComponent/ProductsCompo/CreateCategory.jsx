@@ -4,6 +4,7 @@ import blue from "../../../assets/blue.gif";
 
 const CreateCategory = ({ data }) => {
   const { loading, setLoading } = data;
+  const [loadingButton, setLoadingButton] = useState(false);
 
   const [formData, setFormData] = useState({
     category: "",
@@ -17,10 +18,11 @@ const CreateCategory = ({ data }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmitCategory = async (e) => {
     e.preventDefault();
+    setLoadingButton(true);
     setLoading(true);
-    console.log(formData);
+
     // Other registration form submission logic
 
     fetch("http://localhost:5000/api/v1/category", {
@@ -44,14 +46,15 @@ const CreateCategory = ({ data }) => {
           toast.error(data.error);
         }
         setLoading(false);
+        setLoadingButton(false);
       });
   };
 
   return (
     <div className=" mt-4 ">
       <form
-        className=" border shadow-xl shadow-sky-300 px-2 py-6 md:p-8 rounded-md"
-        onSubmit={handleSubmit}
+        className=" border shadow-xl shadow-sky-200 px-2 py-6 md:p-8 rounded-md"
+        onSubmit={handleSubmitCategory}
       >
         <div className="flex flex-col w-full">
           <label
@@ -75,14 +78,16 @@ const CreateCategory = ({ data }) => {
           <div className="flex items-center justify-center h-10  bg-sky-700 hover:bg-sky-800 duration-200 rounded">
             <button className=" ">
               <img
-                className={`w-8 text-center  mx-auto ${!loading && "hidden"}`}
+                className={`w-8 text-center  mx-auto ${
+                  !loadingButton && "hidden"
+                }`}
                 src={blue}
                 alt=""
               />
             </button>
             <button
               className={`w-full h-full  text-white py-18 ${
-                loading && "hidden"
+                loadingButton && "hidden"
               }`}
             >
               <span>Add Category</span>

@@ -6,6 +6,7 @@ import DeleteCategory from "../../../../Components/DashboardComponent/ProductsCo
 const AddCategory = () => {
   const [allCategory, setAllCategory] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(0);
 
   // load all category
   // load all orders
@@ -14,7 +15,7 @@ const AddCategory = () => {
       try {
         const response = await fetch("http://localhost:5000/api/v1/category");
         const data = await response.json();
-        console.log(data);
+
         setAllCategory(data.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -22,11 +23,11 @@ const AddCategory = () => {
     };
 
     fetchCategories();
-  }, [loading]);
+  }, [loading, reload]);
 
   return (
-    <div className=" min-h-screen">
-      <div className="full-width-all pt-4  pb-24 ">
+    <div className="bg-white ">
+      <div className=" pt-4  pb-24 ">
         <div className="w-full  m-auto  flex gap-8">
           <div className="w-1/2 ">
             <div className=" ">
@@ -42,7 +43,13 @@ const AddCategory = () => {
           </div>
 
           <DeleteCategory
-            data={{ setLoading, allCategory, setAllCategory }}
+            data={{
+              setLoading,
+              allCategory,
+              setAllCategory,
+              reload,
+              setReload,
+            }}
           ></DeleteCategory>
         </div>
       </div>

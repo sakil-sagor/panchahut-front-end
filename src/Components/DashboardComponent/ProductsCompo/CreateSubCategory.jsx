@@ -4,8 +4,9 @@ import blue from "../../../assets/blue.gif";
 
 const CreateSubCategory = ({ data }) => {
   const { allCategory, setAllCategory, loading, setLoading } = data;
+  const [loadingButton, setLoadingButton] = useState(false);
   const [formData, setFormData] = useState({
-    category: "",
+    categoryId: "",
     subCategory: "",
   });
 
@@ -19,11 +20,12 @@ const CreateSubCategory = ({ data }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setLoadingButton(true);
 
     // Other registration form submission logic
 
-    fetch("http://localhost:5000/api/v1/category/", {
-      method: "POST",
+    fetch("http://localhost:5000/api/v1/category/createsubcategory", {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -31,23 +33,22 @@ const CreateSubCategory = ({ data }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        if (data.status === "success") {
           toast.success("success");
           setFormData({
-            category: "",
             subCategory: "",
           });
         }
 
-        setLoading(false);
         if (data.error) {
           setFormData({
-            category: "",
             subCategory: "",
           });
 
           toast.error(" failed");
         }
+        setLoading(false);
+        setLoadingButton(false);
       });
   };
 
@@ -60,24 +61,26 @@ const CreateSubCategory = ({ data }) => {
         <div className="flex flex-col w-full">
           <label
             className=" text-gray-600 font-semibold block "
-            htmlFor="category"
+            htmlFor="categoryId"
           >
             Name
           </label>
-
           <select
             required
             className="py-2 px-4 w-full text-lg  required rounded-md "
-            name="category"
-            value={formData.category}
+            name="categoryId"
+            value={formData.categoryId}
             onChange={handleInputChange}
           >
             <option value="" disabled selected>
-              Category{" "}
+              Category
             </option>
-            <option value="saree"> saree</option>
-            <option value="lungi"> lungi</option>
-            <option value="shawl">shawl</option>
+            {allCategory?.map((cat) => (
+              <option key={cat?._id} value={cat?._id}>
+                {" "}
+                {cat?.category}
+              </option>
+            ))}
           </select>
         </div>
         <div className="flex flex-col w-full">
@@ -89,6 +92,7 @@ const CreateSubCategory = ({ data }) => {
           </label>
           <input
             required
+            id="subCategoryName"
             className="py-1 px-2 rounded-md border border-gray-300"
             type="text"
             name="subCategory"
@@ -102,14 +106,16 @@ const CreateSubCategory = ({ data }) => {
           <div className="flex items-center justify-center h-10  bg-sky-700 rounded">
             <button className=" ">
               <img
-                className={`w-8 text-center  mx-auto ${!loading && "hidden"}`}
+                className={`w-8 text-center  mx-auto ${
+                  !loadingButton && "hidden"
+                }`}
                 src={blue}
                 alt=""
               />
             </button>
             <button
               className={`w-full h-full  text-white py-18 ${
-                loading && "hidden"
+                loadingButton && "hidden"
               }`}
             >
               <span>Add Category</span>
