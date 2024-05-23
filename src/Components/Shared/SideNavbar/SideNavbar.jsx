@@ -28,7 +28,7 @@ const SideNavbar = () => {
           <hr className="mb-6" />
           <div>
             <Link
-              className=" block py-1 border mb-3 hover:bg-blue-900 hover:text-white rounded-lg"
+              className=" block py-1 border mb-3 hover:bg-sky-900 hover:text-white rounded-lg"
               to="/dashboard"
             >
               View Profile
@@ -36,7 +36,7 @@ const SideNavbar = () => {
           </div>
           <div>
             <Link
-              className=" block py-1 border mb-3 hover:bg-blue-900 hover:text-white rounded-lg"
+              className=" block py-1 border mb-3 hover:bg-sky-900 hover:text-white rounded-lg"
               to="/dashboard/products"
             >
               products
@@ -46,7 +46,7 @@ const SideNavbar = () => {
             <>
               <div>
                 <Link
-                  className=" block py-1 border mb-3 hover:bg-blue-900 hover:text-white rounded-lg"
+                  className=" block py-1 border mb-3 hover:bg-sky-900 hover:text-white rounded-lg"
                   to="/dashboard/stocks"
                 >
                   Stocks

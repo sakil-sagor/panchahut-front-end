@@ -35,7 +35,7 @@ function SideDrawer({ isOpen, onClose, children }) {
           <div>
             <Link
               onClick={onClose}
-              className=" block py-2 text-sm mb-4 border mx-10 hover:bg-blue-900 text-white rounded"
+              className=" block py-2 text-sm mb-4 border mx-10 hover:bg-sky-900 text-white rounded"
               to="/dashboard"
             >
               View Profile
@@ -44,7 +44,7 @@ function SideDrawer({ isOpen, onClose, children }) {
           <div>
             <Link
               onClick={onClose}
-              className=" block py-2 text-sm mb-4 border mx-10 hover:bg-blue-900 text-white rounded"
+              className=" block py-2 text-sm mb-4 border mx-10 hover:bg-sky-900 text-white rounded"
               to="/dashboard/makePayment"
             >
               Make Payment
@@ -56,7 +56,7 @@ function SideDrawer({ isOpen, onClose, children }) {
               <div>
                 <Link
                   onClick={onClose}
-                  className="block py-2 text-sm mb-4 border mx-10 hover:bg-blue-900 text-white rounded"
+                  className="block py-2 text-sm mb-4 border mx-10 hover:bg-sky-900 text-white rounded"
                   to="/dashboard/allStudent"
                 >
                   All Students

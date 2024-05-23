@@ -118,7 +118,7 @@ const CreateProduct = () => {
             <div className=" ">
               <div className=" m-4 ">
                 <form
-                  className=" border shadow-xl shadow-blue-300 p-2  rounded-md"
+                  className=" border shadow-xl shadow-sky-300 p-2  rounded-md"
                   onSubmit={handleSubmit}
                 >
                   <div className="flex items-end justify-between">

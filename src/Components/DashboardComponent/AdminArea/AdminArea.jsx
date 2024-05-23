@@ -17,7 +17,7 @@ const AdminArea = () => {
 
   return (
     <div>
-      <h2 className="text-center text-4xl font-bold text-blue-950 mb-6">
+      <h2 className="text-center text-4xl font-bold text-sky-950 mb-6">
         My Profile
       </h2>
       <hr />
@@ -100,7 +100,7 @@ const AdminArea = () => {
             </div>
             <div className="mb-3 text-center lg:text-start">
               <input
-                className=" bg-indigo-600 border rounded-md border-black px-5 py-1 text-white"
+                className=" bg-sky-600 border rounded-md border-black px-5 py-1 text-white"
                 type="submit"
               />
             </div>

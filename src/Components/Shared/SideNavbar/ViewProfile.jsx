@@ -14,7 +14,7 @@ const ViewProfile = () => {
               {user?.role}
             </button>
           </p>
-          {/* <h1 className="text-indigo-900 font-semibold text-2xl mb-6 ml-4">Admin Profile</h1> */}
+          {/* <h1 className="text-sky-900 font-semibold text-2xl mb-6 ml-4">Admin Profile</h1> */}
         </div>
         {/* <hr /> */}
 

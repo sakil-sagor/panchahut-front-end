@@ -52,10 +52,10 @@ const Login = () => {
   };
 
   return (
-    <div className=" bg-blue-50">
+    <div className=" bg-sky-50">
       <div className="">
         <form className="md:flex justify-center md:m-0" onSubmit={handleLogin}>
-          <div className="md:w-96 px-4 py-8  bg-white rounded-md shadow-2xl shadow-blue-300">
+          <div className="md:w-96 px-4 py-8  bg-white rounded-md shadow-2xl shadow-sky-300">
             <div className="mb-3 ">
               <span className=" text-gray-600 font-semibold block mb-2 ">
                 Phone

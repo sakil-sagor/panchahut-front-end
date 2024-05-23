@@ -57,10 +57,10 @@ const SignUp = ({ loginArea }) => {
       });
   };
   return (
-    <div className=" bg-blue-50">
+    <div className=" bg-sky-50">
       <div className="">
         <form className="md:flex justify-center" onSubmit={handleSubmit}>
-          <div className="md:w-96 px-4  py-8 border-2 rounded-md bg-white shadow-2xl shadow-blue-300">
+          <div className="md:w-96 px-4  py-8 border-2 rounded-md bg-white shadow-2xl shadow-sky-300">
             <div className="mb-2 ">
               <span className=" text-gray-600 font-semibold block mb-2 ">
                 Name
@@ -115,7 +115,7 @@ const SignUp = ({ loginArea }) => {
                 Alreday have an account, Please
                 <button
                   onClick={loginArea}
-                  className="text-blue-900 py-2 text-lg font-bold"
+                  className="text-sky-900 py-2 text-lg font-bold"
                   to="/login"
                 >
                   Log In

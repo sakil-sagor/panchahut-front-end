@@ -18,7 +18,7 @@ const Registration = () => {
     <div className=" bg-sky-50 min-h-screen">
       <div className="full-width-all pb-16">
         <div className=" mb-4 m-auto pt-16 md:w-96">
-          <div className="px-4 w-full py-6 bg-white flex justify-between  shadow-2xl shadow-blue-300 rounded ">
+          <div className="px-4 w-full py-6 bg-white flex justify-between  shadow-2xl shadow-sky-300 rounded ">
             <button
               className={`bg-sky-200 px-8 py-2 rounded-full ${
                 login && "bg-sky-700 text-white"

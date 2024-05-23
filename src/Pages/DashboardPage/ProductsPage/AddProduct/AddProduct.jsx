@@ -1,4 +1,4 @@
-import CreateProduct from "../../../../Components/DashboardComponent/CreateProduct/CreateProduct";
+import CreateProduct from "../../../../Components/DashboardComponent/ProductsCompo/CreateProduct";
 
 const AddProduct = () => {
   return (
