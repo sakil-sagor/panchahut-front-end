@@ -7,7 +7,6 @@ import useCategory from "../../../hooks/useCategory";
 
 const CreateProduct = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -19,7 +18,6 @@ const CreateProduct = () => {
     productImage: "",
     adminName: user?.fullName,
     brandName: "",
-
     subcategory: "",
     weight: "",
     weightUnit: "",
@@ -28,7 +26,7 @@ const CreateProduct = () => {
     regularPrice: "",
     discount: "",
   });
-  console.log(getCategory);
+
   /////////////////////////
 
   const handleInputChange = (e) => {
@@ -106,6 +104,7 @@ const CreateProduct = () => {
             originName: "",
             brandName: "",
             category: "",
+            weightUnit: "",
           });
           setLoading(false);
         }
@@ -260,14 +259,14 @@ const CreateProduct = () => {
                         required
                         className="py-2 px-4  text-lg  required rounded-md "
                         name="categoryId"
-                        value={formData.categoryId}
+                        value={formData.category}
                         onChange={(e) => setGetCategory(e.target.value)}
                       >
                         <option value="" disabled selected>
                           Category
                         </option>
                         {allCategory?.map((cat) => (
-                          <option key={cat?._id} value={cat?._id}>
+                          <option key={cat?._id} value={cat?.category}>
                             {" "}
                             {cat?.category}
                           </option>
@@ -319,23 +318,20 @@ const CreateProduct = () => {
                       <select
                         name="weightUnit"
                         id="weightUnit"
+                        required
+                        value={formData.weightUnit}
+                        onChange={handleInputChange}
                         className="py-1   px-2 rounded-md border border-gray-300"
                       >
+                        <option value="" disabled selected>
+                          Weight Unit
+                        </option>
                         <option value="gm">gm</option>
                         <option value="kg">Kg</option>
                         <option value="ml">ml</option>
                         <option value="liter">Liter</option>
                         <option value="pice">Pice</option>
                       </select>
-                      {/* <input
-                        className="py-1 block  px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="weightUnit"
-                        placeholder="  Weight Unit"
-                        value={formData.weightUnit}
-                        onChange={handleInputChange}
-                      /> */}
                     </div>
 
                     <div className=" mt-2">
