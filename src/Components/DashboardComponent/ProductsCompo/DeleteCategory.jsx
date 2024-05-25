@@ -38,14 +38,13 @@ const DeleteCategory = ({ data }) => {
         .then((data) => {
           console.log(data);
 
-          if (data.data.status === "success") {
+          if (data.status === "success") {
             toast.success("success");
           }
         });
     }
     setReload(reload + 1);
   };
-  console.log(allCategory);
 
   return (
     <div className="w-1/2 ">

@@ -3,19 +3,23 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import blue from "../../../assets/blue.gif";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import useCategory from "../../../hooks/useCategory";
 
 const CreateProduct = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
+  const { allCategory } = useCategory();
+  const [getCategory, setGetCategory] = useState("");
   const [formData, setFormData] = useState({
     productName: "",
     description: "",
     productImage: "",
-    adminName: user?.fullname,
+    adminName: user?.fullName,
     brandName: "",
-    category: "",
+
     subcategory: "",
     weight: "",
     weightUnit: "",
@@ -24,12 +28,13 @@ const CreateProduct = () => {
     regularPrice: "",
     discount: "",
   });
-
+  console.log(getCategory);
   /////////////////////////
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
+
       [e.target.name]: e.target.value,
     });
   };
@@ -76,6 +81,7 @@ const CreateProduct = () => {
     const imageUrl = await uploadImageToImgBB(imageFile);
     const productData = {
       ...formData,
+      category: getCategory,
       productImage: imageUrl,
     };
     console.log(productData);
@@ -110,6 +116,9 @@ const CreateProduct = () => {
         }
       });
   };
+
+  // get the category
+
   return (
     <div className="bg-sky-50 min-h-screen">
       <div className="   pb-24 ">
@@ -129,7 +138,7 @@ const CreateProduct = () => {
                       <input
                         className="py-1 w-full  px-2 rounded-md border border-gray-300"
                         type="text"
-                        value={user?.displayName || user?.email.split("@")[0]}
+                        value={user?.fullName}
                       />
                     </div>
                   </div>
@@ -242,19 +251,28 @@ const CreateProduct = () => {
                     </div>
                     <div className=" mt-2">
                       <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="category"
+                        className=" text-gray-600 font-semibold block "
+                        htmlFor="categoryId"
                       >
-                        Category
+                        Name
                       </label>
-                      <input
-                        className="py-1 block  px-2 rounded-md border border-gray-300"
-                        type="text"
-                        name="category"
-                        placeholder="Category"
-                        value={formData.category}
-                        onChange={handleInputChange}
-                      />
+                      <select
+                        required
+                        className="py-2 px-4  text-lg  required rounded-md "
+                        name="categoryId"
+                        value={formData.categoryId}
+                        onChange={(e) => setGetCategory(e.target.value)}
+                      >
+                        <option value="" disabled selected>
+                          Category
+                        </option>
+                        {allCategory?.map((cat) => (
+                          <option key={cat?._id} value={cat?._id}>
+                            {" "}
+                            {cat?.category}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div className=" mt-2">
                       <label

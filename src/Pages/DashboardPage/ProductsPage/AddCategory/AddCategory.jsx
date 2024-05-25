@@ -1,29 +1,37 @@
-import { useEffect, useState } from "react";
 import CreateCategory from "../../../../Components/DashboardComponent/ProductsCompo/CreateCategory";
 import CreateSubCategory from "../../../../Components/DashboardComponent/ProductsCompo/CreateSubCategory";
 import DeleteCategory from "../../../../Components/DashboardComponent/ProductsCompo/DeleteCategory";
+import useCategory from "../../../../hooks/useCategory";
 
 const AddCategory = () => {
-  const [allCategory, setAllCategory] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [reload, setReload] = useState(0);
+  // const [allCategory, setAllCategory] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [reload, setReload] = useState(0);
 
-  // load all category
-  // load all orders
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/v1/category");
-        const data = await response.json();
+  // // load all category
+  // // load all orders
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:5000/api/v1/category");
+  //       const data = await response.json();
 
-        setAllCategory(data.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
+  //       setAllCategory(data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching categories:", error);
+  //     }
+  //   };
 
-    fetchCategories();
-  }, [loading, reload]);
+  //   fetchCategories();
+  // }, [loading, reload]);
+  const {
+    allCategory,
+    loading,
+    setAllCategory,
+    setLoading,
+    reload,
+    setReload,
+  } = useCategory();
 
   return (
     <div className="bg-white ">

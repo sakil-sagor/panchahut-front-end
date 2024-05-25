@@ -36,14 +36,16 @@ const CreateSubCategory = ({ data }) => {
         if (data.status === "success") {
           toast.success("success");
           setFormData({
+            categoryId: "",
             subCategory: "",
           });
         }
 
         if (data.error) {
-          setFormData({
-            subCategory: "",
-          });
+          // setFormData({
+          //   categoryId: "",
+          //   subCategory: "",
+          // });
 
           toast.error(" failed");
         }
@@ -118,7 +120,7 @@ const CreateSubCategory = ({ data }) => {
                 loadingButton && "hidden"
               }`}
             >
-              <span>Add Category</span>
+              <span>Add Sub Category</span>
             </button>
           </div>
         </div>
