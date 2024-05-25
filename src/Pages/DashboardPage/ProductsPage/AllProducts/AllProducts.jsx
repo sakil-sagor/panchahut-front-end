@@ -16,7 +16,7 @@ const AllProducts = () => {
             <div className="py-6">
               <h2 className="text-green-600 font-semibold text-2xl ">
                 <AiFillDatabase className="inline mb-1"></AiFillDatabase>
-                Techers list
+                Products list
               </h2>
               <div className="flex items-center justify-between mt-4 px-2">
                 <p>
