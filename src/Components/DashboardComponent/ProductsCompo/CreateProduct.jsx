@@ -14,6 +14,7 @@ const CreateProduct = () => {
   const [getCategory, setGetCategory] = useState("");
   const [formData, setFormData] = useState({
     productName: "",
+    productNameBangla: "",
     description: "",
     productImage: "",
     adminName: user?.fullName,
@@ -96,28 +97,35 @@ const CreateProduct = () => {
           toast.success("success");
           setFormData({
             productName: "",
+            productNameBangla: "",
             description: "",
             productImage: "",
-            costingPrice: "",
-            discount: "",
-            regularPrice: "",
-            originName: "",
             brandName: "",
-            category: "",
+            subcategory: "",
+            weight: "",
             weightUnit: "",
+            quantity: "",
+            costingPrice: "",
+            regularPrice: "",
+            discount: "",
           });
+          setGetCategory("");
           setLoading(false);
         }
 
         if (data.error) {
           toast.error(" failed");
           setLoading(false);
+          console.log(data.error);
         }
       });
   };
 
-  // get the category
-
+  // get the sub category
+  const subCategoryName = allCategory.find(
+    (categoryName) => categoryName.category === getCategory
+  );
+  console.log(subCategoryName?.subCategory);
   return (
     <div className="bg-sky-50 min-h-screen">
       <div className="   pb-24 ">
@@ -129,34 +137,52 @@ const CreateProduct = () => {
                   className=" border shadow-xl shadow-sky-300 p-2  rounded-md"
                   onSubmit={handleSubmit}
                 >
-                  <div className="flex items-end justify-between">
+                  <div className="flex  items-center justify-between ">
+                    <div className="flex items-end justify-between">
+                      <div className=" mt-2">
+                        <label className=" text-gray-600 font-semibold  ">
+                          Admin Name
+                        </label>
+                        <input
+                          className="py-1 w-full  px-2 rounded-md border border-gray-300"
+                          type="text"
+                          value={user?.fullName}
+                        />
+                      </div>
+                    </div>
+
                     <div className=" mt-2">
-                      <label className=" text-gray-600 font-semibold  ">
-                        User Name
+                      <label
+                        className=" text-gray-600 font-semibold  "
+                        htmlFor="productName"
+                      >
+                        Product Name
                       </label>
                       <input
                         className="py-1 w-full  px-2 rounded-md border border-gray-300"
                         type="text"
-                        value={user?.fullName}
+                        name="productName"
+                        placeholder="Prodcut name "
+                        value={formData.productName}
+                        onChange={handleInputChange}
                       />
                     </div>
-                  </div>
-
-                  <div className=" mt-2">
-                    <label
-                      className=" text-gray-600 font-semibold  "
-                      htmlFor="productName"
-                    >
-                      Product Name
-                    </label>
-                    <input
-                      className="py-1 w-full  px-2 rounded-md border border-gray-300"
-                      type="text"
-                      name="productName"
-                      placeholder="Procuts name"
-                      value={formData.productName}
-                      onChange={handleInputChange}
-                    />
+                    <div className=" mt-2">
+                      <label
+                        className=" text-gray-600 font-semibold  "
+                        htmlFor="productName"
+                      >
+                        Product Name Bangla
+                      </label>
+                      <input
+                        className="py-1 w-full  px-2 rounded-md border border-gray-300"
+                        type="text"
+                        name="productNameBangla"
+                        placeholder="Prodcut name bangla"
+                        value={formData.productNameBangla}
+                        onChange={handleInputChange}
+                      />
+                    </div>
                   </div>
                   <div className="flex  items-center justify-start">
                     <div className=" mt-2 w-1/2">
@@ -253,7 +279,7 @@ const CreateProduct = () => {
                         className=" text-gray-600 font-semibold block "
                         htmlFor="categoryId"
                       >
-                        Name
+                        Category
                       </label>
                       <select
                         required
@@ -262,8 +288,8 @@ const CreateProduct = () => {
                         value={formData.category}
                         onChange={(e) => setGetCategory(e.target.value)}
                       >
-                        <option value="" disabled selected>
-                          Category
+                        <option className="" value="" disabled selected>
+                          -- Select Category --
                         </option>
                         {allCategory?.map((cat) => (
                           <option key={cat?._id} value={cat?.category}>
@@ -275,19 +301,29 @@ const CreateProduct = () => {
                     </div>
                     <div className=" mt-2">
                       <label
-                        className=" text-gray-600 font-semibold  "
+                        className=" text-gray-600 font-semibold  block"
                         htmlFor="subcategory"
                       >
                         Sub-Category
                       </label>
-                      <input
-                        className="py-1 block  px-2 rounded-md border border-gray-300"
-                        type="text"
+                      <select
+                        required
+                        className="py-2 px-4  text-lg  required rounded-md "
                         name="subcategory"
                         placeholder="Sub-Category"
                         value={formData.subcategory}
                         onChange={handleInputChange}
-                      />
+                      >
+                        <option className="" value="" disabled selected>
+                          -- Select Sub-Category --
+                        </option>
+                        {subCategoryName?.subCategory?.map((cat) => (
+                          <option key={cat} value={cat}>
+                            {" "}
+                            {cat}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 lg:grid-cols-3 items-center justify-between">
@@ -310,7 +346,7 @@ const CreateProduct = () => {
                     </div>
                     <div className=" mt-2">
                       <label
-                        className=" text-gray-600 font-semibold  "
+                        className=" text-gray-600 font-semibold  block"
                         htmlFor="weightUnit"
                       >
                         Weight Unit
@@ -324,7 +360,7 @@ const CreateProduct = () => {
                         className="py-1   px-2 rounded-md border border-gray-300"
                       >
                         <option value="" disabled selected>
-                          Weight Unit
+                          -- Select Weight Unit --
                         </option>
                         <option value="gm">gm</option>
                         <option value="kg">Kg</option>
