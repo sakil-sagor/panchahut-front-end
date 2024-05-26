@@ -42,6 +42,14 @@ const SideNavbar = () => {
               products
             </Link>
           </div>
+          <div>
+            <Link
+              className=" block py-1 border mb-3 hover:bg-sky-900 hover:text-white rounded-lg"
+              to="/dashboard/sales"
+            >
+              Sales
+            </Link>
+          </div>
           {user.phone && (
             <>
               <div>

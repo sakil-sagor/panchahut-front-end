@@ -6,6 +6,8 @@ import AddCategory from "../Pages/DashboardPage/ProductsPage/AddCategory/AddCate
 import AddProduct from "../Pages/DashboardPage/ProductsPage/AddProduct/AddProduct";
 import AllProducts from "../Pages/DashboardPage/ProductsPage/AllProducts/AllProducts";
 import ProductsPage from "../Pages/DashboardPage/ProductsPage/ProductsPage";
+import SalesPage from "../Pages/DashboardPage/SalesPage/SalesPage";
+import SellProductPage from "../Pages/DashboardPage/SalesPage/SellProductPage/SellProductPage";
 import HomePage from "../Pages/FrontendPage/HomePage/HomePage";
 import Registration from "../Pages/FrontendPage/RegistrationPage/Registration";
 import PrivateRoute from "./PrivateRoute";
@@ -67,6 +69,16 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/products/addcategory",
                 element: <AddCategory></AddCategory>,
+              },
+            ],
+          },
+          {
+            path: "/dashboard/sales",
+            element: <SalesPage></SalesPage>,
+            children: [
+              {
+                path: "/dashboard/sales",
+                element: <SellProductPage></SellProductPage>,
               },
             ],
           },

@@ -3,7 +3,7 @@ import TopNavbar from "../../../Components/Shared/SideNavbar/TopNavbar";
 
 const ProductsPage = () => {
   const routes = [
-    { id: 1, path: "/dashboard/products/allproducts", name: " All Products" },
+    { id: 1, path: "/dashboard/products", name: " All Products" },
     { id: 2, path: "/dashboard/products/addproducts", name: "Add Product" },
     { id: 2, path: "/dashboard/products/addcategory", name: "Category " },
   ];
