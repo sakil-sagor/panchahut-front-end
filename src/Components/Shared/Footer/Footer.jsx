@@ -46,7 +46,6 @@ const Footer = () => {
         <div className="col-sapn-6 ">
           <div className=" mt-2 text-center">
             <h3 className="text-center py-2 font-semibold text-xl text-white">
-              {" "}
               Links
             </h3>
             <ul className="tab-list text-gray-300">

@@ -63,6 +63,10 @@ const router = createBrowserRouter([
                 element: <AllProducts></AllProducts>,
               },
               {
+                path: "/dashboard/products/all",
+                element: <AllProducts></AllProducts>,
+              },
+              {
                 path: "/dashboard/products/addproducts",
                 element: <AddProduct></AddProduct>,
               },
@@ -77,7 +81,23 @@ const router = createBrowserRouter([
             element: <SalesPage></SalesPage>,
             children: [
               {
-                path: "/dashboard/sales",
+                path: "/dashboard/sales/customer1",
+                element: <SellProductPage></SellProductPage>,
+              },
+              {
+                path: "/dashboard/sales/customer2",
+                element: <SellProductPage></SellProductPage>,
+              },
+              {
+                path: "/dashboard/sales/customer3",
+                element: <SellProductPage></SellProductPage>,
+              },
+              {
+                path: "/dashboard/sales/customer4",
+                element: <SellProductPage></SellProductPage>,
+              },
+              {
+                path: "/dashboard/sales/customer5",
                 element: <SellProductPage></SellProductPage>,
               },
             ],

@@ -9,7 +9,11 @@ const TopNavbar = ({ routes }) => {
             <li key={route.id} className="  border-x-2 teacher-nav ">
               <NavLink
                 to={route?.path}
-                className="block py-2  px-12  hover:bg-sky-900 "
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "bg-sky-900" : ""
+                  } block py-2  px-12  hover:bg-sky-900`
+                }
               >
                 <span className=" block text-white text-sm">{route?.name}</span>
               </NavLink>

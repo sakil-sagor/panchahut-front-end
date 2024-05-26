@@ -293,7 +293,6 @@ const CreateProduct = () => {
                         </option>
                         {allCategory?.map((cat) => (
                           <option key={cat?._id} value={cat?.category}>
-                            {" "}
                             {cat?.category}
                           </option>
                         ))}
@@ -319,7 +318,6 @@ const CreateProduct = () => {
                         </option>
                         {subCategoryName?.subCategory?.map((cat) => (
                           <option key={cat} value={cat}>
-                            {" "}
                             {cat}
                           </option>
                         ))}

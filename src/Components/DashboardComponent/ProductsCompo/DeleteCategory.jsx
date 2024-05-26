@@ -69,7 +69,6 @@ const DeleteCategory = ({ data }) => {
                     onClick={() => handleRemoveSubcategory(cat?._id, name)}
                     className="bg-red-700 text-white px-2 ml-2 rounded hover:bg-red-800 "
                   >
-                    {" "}
                     X
                   </button>
                 </div>
@@ -81,7 +80,6 @@ const DeleteCategory = ({ data }) => {
                 onClick={() => handleRemovecategory(cat?._id)}
                 className="bg-red-700 text-white px-2 py-1 rounded hover:bg-red-800 "
               >
-                {" "}
                 Delete
               </button>
             </td>

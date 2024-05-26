@@ -79,7 +79,6 @@ const CreateSubCategory = ({ data }) => {
             </option>
             {allCategory?.map((cat) => (
               <option key={cat?._id} value={cat?._id}>
-                {" "}
                 {cat?.category}
               </option>
             ))}
