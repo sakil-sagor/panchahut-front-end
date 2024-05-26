@@ -18,7 +18,7 @@ const SellProductPage = () => {
 
   useEffect(() => {
     // if (searchText) {
-    //   const url = `http://localhost:5000/api/v1/product/${searchText}`;
+    //   const url = `https://panchahut-server.vercel.app/api/v1/product/${searchText}`;
 
     //   fetch(url)
     //     .then((res) => res.json())
@@ -32,7 +32,7 @@ const SellProductPage = () => {
 
   const searchProductById = (searchText) => {
     if (searchText) {
-      const url = `http://localhost:5000/api/v1/product/${searchText}`;
+      const url = `https://panchahut-server.vercel.app/api/v1/product/${searchText}`;
 
       fetch(url)
         .then((res) => res.json())
@@ -50,7 +50,7 @@ const SellProductPage = () => {
   const handelCountQuentity = async (productId, boolean) => {
     // get the product from database
     let newResult;
-    const url = `http://localhost:5000/api/v1/product/${productId}`;
+    const url = `https://panchahut-server.vercel.app/api/v1/product/${productId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();

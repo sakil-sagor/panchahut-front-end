@@ -50,7 +50,7 @@ const SideNavbar = () => {
               Sales
             </Link>
           </div>
-          {user.phone && (
+          {/* {user.phone && (
             <>
               <div>
                 <Link
@@ -61,7 +61,7 @@ const SideNavbar = () => {
                 </Link>
               </div>
             </>
-          )}
+          )} */}
 
           {
             <div className="mt-24">
