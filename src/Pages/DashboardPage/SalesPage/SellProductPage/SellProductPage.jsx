@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
+import { toast } from "react-toastify";
 import ProductSearchSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/ProductSearchSaleComp";
 import SearchProductSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/SearchProductSaleComp";
 import { getStoredData } from "../../../../utils/localStorage";
@@ -16,6 +17,20 @@ const SellProductPage = () => {
   const [lastElement] = pathSegments.slice(-1);
 
   useEffect(() => {
+    // if (searchText) {
+    //   const url = `http://localhost:5000/api/v1/product/${searchText}`;
+
+    //   fetch(url)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       setSearchResult(data.data);
+    //     });
+    // }
+    searchProductById(searchText);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [searchText]);
+
+  const searchProductById = (searchText) => {
     if (searchText) {
       const url = `http://localhost:5000/api/v1/product/${searchText}`;
 
@@ -25,23 +40,38 @@ const SellProductPage = () => {
           setSearchResult(data.data);
         });
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, [searchText]);
+  };
 
   useEffect(() => {
     const result = getStoredData(lastElement);
     setAddToCart(result);
   }, [lastElement, reload]);
 
-  const handelCountQuentity = (productId, boolean) => {
+  const handelCountQuentity = async (productId, boolean) => {
+    // get the product from database
+    let newResult;
+    const url = `http://localhost:5000/api/v1/product/${productId}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      newResult = data?.data;
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+    }
+
     const result = getStoredData(lastElement);
     const plus = result.map((product) => {
+      console.log(product);
       if (product.productId === productId) {
-        let newValue = boolean
-          ? product.orderQuentity + 1
-          : product.orderQuentity - 1;
+        if (newResult.quantity === product.orderQuentity && boolean) {
+          toast.error("Stock is empty,Can not add more.");
+        } else {
+          let newValue = boolean
+            ? product.orderQuentity + 1
+            : product.orderQuentity - 1;
 
-        return { ...product, orderQuentity: Math.max(1, newValue) };
+          return { ...product, orderQuentity: Math.max(1, newValue) };
+        }
       }
       return product;
     });
@@ -49,9 +79,15 @@ const SellProductPage = () => {
     localStorage.setItem(lastElement, JSON.stringify(plus));
     setReload(reload + 1);
   };
-  console.log(searchText);
-  console.log(searchResult);
 
+  const totalPriceAll = () => {
+    const result = getStoredData(lastElement);
+    const totalSum = result.reduce((sum, product) => {
+      return sum + product.regularPrice * product.orderQuentity;
+    }, 0);
+    return totalSum;
+  };
+  console.log(totalPriceAll());
   return (
     <div>
       <div className="grid grid-cols-2">
@@ -81,6 +117,7 @@ const SellProductPage = () => {
             <table className="w-full table-auto text-center">
               <thead>
                 <tr className=" ">
+                  <th className="px-4 py-2 ">Id</th>
                   <th className="px-4 py-2 text-left">Name</th>
                   <th className="px-4 py-2">Price</th>
                   <th className="px-4 py-2">Quantity</th>
@@ -94,6 +131,9 @@ const SellProductPage = () => {
                     key={index}
                     className={index % 2 === 0 ? "bg-[#f2f2f2]" : ""}
                   >
+                    <td className="px-4 py-2 text-left">
+                      {product?.productId}
+                    </td>
                     <td className="px-4 py-2 text-left">
                       {product?.productName}
                     </td>
@@ -129,6 +169,17 @@ const SellProductPage = () => {
                 ))}
               </tbody>
             </table>
+            <br />
+            <hr />
+            <div className="mx-6 ">
+              <p className="text-right">
+                Total :{" "}
+                <span className="mx-2 font-bold text-orange-600">
+                  {totalPriceAll()}
+                </span>
+                Tk
+              </p>
+            </div>
           </div>
         </div>
       </div>
