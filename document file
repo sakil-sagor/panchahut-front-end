@@ -25,7 +25,6 @@ product:{
 
 
 
-
 user:{
     "id":1001,
     "userName":"asdkfmasldkjf",
@@ -45,3 +44,71 @@ user:{
 
 
 
+
+
+product:{
+  "id":1001,
+  "productName":"asdkfmasldkjf",
+  "description":"asdkjfasdkjf",
+  "productImage":"kasdf",
+  "adminName":"asdkjfasdkjf",  
+  "brandName":"asdkjfasdkjf",          
+  "category":"asdkjfasdkjf",
+  "subCategory":"asdkjfasdkjf",
+  "weight":25, N/A,
+  "weightUnit":"kg,liter,pice",
+  "available":"available,sold-out",
+  "featured":"true,false",
+  "status":"active,pending,stock",
+  [
+    {
+      "batch":1,
+      "quantity":10,
+      "costingPrice":20,
+      "regularPrice":25,
+      "discount":0%,
+    }
+    {
+      "batch":2,
+      "quantity":5,
+      "costingPrice":22,
+      "regularPrice":30,
+      "discount":0%,
+    }
+  ]
+}
+
+
+
+
+product:{
+  "id":1001,
+  "productName":"asdkfmasldkjf",
+  "productNameBangla": "",
+  "description":"asdkjfasdkjf",
+  "productImage":"kasdf", 
+  "brandName":"asdkjfasdkjf",          
+  "category":"asdkjfasdkjf",
+  "subCategory":"asdkjfasdkjf",
+  "weight":25, N/A,
+  "weightUnit":"kg,liter,pice",
+  "available":"available,sold-out",
+  "featured":"true,false",
+  "status":"active,pending,stock",
+}
+
+    {
+      "productId":1001,
+      "quantity":10,
+      "costingPrice":20,
+      "regularPrice":25,
+      "discount":0%,
+    }
+
+        {
+     "productId":1001,
+      "quantity":5,
+      "costingPrice":22,
+      "regularPrice":30,
+      "discount":0%,
+    }

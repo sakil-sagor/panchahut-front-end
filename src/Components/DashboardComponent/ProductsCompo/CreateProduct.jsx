@@ -16,16 +16,10 @@ const CreateProduct = () => {
     productName: "",
     productNameBangla: "",
     description: "",
-    productImage: "",
-    adminName: user?.fullName,
     brandName: "",
     subcategory: "",
     weight: "",
     weightUnit: "",
-    quantity: "",
-    costingPrice: "",
-    regularPrice: "",
-    discount: "",
   });
 
   /////////////////////////
@@ -84,7 +78,7 @@ const CreateProduct = () => {
       productImage: imageUrl,
     };
     console.log(productData);
-    fetch("https://panchahut-server.vercel.app/api/v1/product/create", {
+    fetch("http://localhost:5000/api/v1/product/create", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -101,13 +95,10 @@ const CreateProduct = () => {
             description: "",
             productImage: "",
             brandName: "",
+            category: "",
             subcategory: "",
             weight: "",
             weightUnit: "",
-            quantity: "",
-            costingPrice: "",
-            regularPrice: "",
-            discount: "",
           });
           setGetCategory("");
           setLoading(false);
@@ -125,7 +116,7 @@ const CreateProduct = () => {
   const subCategoryName = allCategory.find(
     (categoryName) => categoryName.category === getCategory
   );
-  console.log(subCategoryName?.subCategory);
+
   return (
     <div className="bg-sky-50 min-h-screen">
       <div className="   pb-24 ">
@@ -138,7 +129,7 @@ const CreateProduct = () => {
                   onSubmit={handleSubmit}
                 >
                   <div className="flex  items-center justify-between ">
-                    <div className="flex items-end justify-between">
+                    {/* <div className="flex items-end justify-between">
                       <div className=" mt-2">
                         <label className=" text-gray-600 font-semibold  ">
                           Admin Name
@@ -149,7 +140,7 @@ const CreateProduct = () => {
                           value={user?.fullName}
                         />
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className=" mt-2">
                       <label
@@ -200,11 +191,10 @@ const CreateProduct = () => {
                         onChange={handleImageUpload}
                       />
                     </div>
-                    {/* Tags input field */}
                   </div>
 
                   <div className="grid grid-cols-2 lg:grid-cols-3 items-center justify-between">
-                    <div className=" mt-2">
+                    {/* <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
                         htmlFor="costingPrice"
@@ -237,9 +227,9 @@ const CreateProduct = () => {
                         value={formData.regularPrice}
                         onChange={handleInputChange}
                       />
-                    </div>
+                    </div> */}
 
-                    <div className=" mt-2">
+                    {/* <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
                         htmlFor="discount"
@@ -250,13 +240,11 @@ const CreateProduct = () => {
                         className="py-1 block w-full md:w-3/4  px-2 rounded-md border border-gray-300"
                         type="number"
                         min="0"
-                        max="100"
                         name="discount"
-                        placeholder="0-100 % discount"
                         value={formData.discount}
                         onChange={handleInputChange}
                       />
-                    </div>
+                    </div> */}
 
                     <div className=" mt-2">
                       <label
@@ -282,7 +270,6 @@ const CreateProduct = () => {
                         Category
                       </label>
                       <select
-                        required
                         className="py-2 px-4  text-lg  required rounded-md "
                         name="categoryId"
                         value={formData.category}
@@ -306,7 +293,6 @@ const CreateProduct = () => {
                         Sub-Category
                       </label>
                       <select
-                        required
                         className="py-2 px-4  text-lg  required rounded-md "
                         name="subcategory"
                         placeholder="Sub-Category"
@@ -368,7 +354,7 @@ const CreateProduct = () => {
                       </select>
                     </div>
 
-                    <div className=" mt-2">
+                    {/* <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
                         htmlFor="quantity"
@@ -384,7 +370,7 @@ const CreateProduct = () => {
                         value={formData.quantity}
                         onChange={handleInputChange}
                       />
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="flex flex-col w-full mt-2">

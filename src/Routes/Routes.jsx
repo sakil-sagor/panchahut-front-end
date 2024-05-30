@@ -8,6 +8,11 @@ import AllProducts from "../Pages/DashboardPage/ProductsPage/AllProducts/AllProd
 import ProductsPage from "../Pages/DashboardPage/ProductsPage/ProductsPage";
 import SalesPage from "../Pages/DashboardPage/SalesPage/SalesPage";
 import SellProductPage from "../Pages/DashboardPage/SalesPage/SellProductPage/SellProductPage";
+import AddStocks from "../Pages/DashboardPage/StocksPage/AddStocks/AddStocks";
+import StockInPage from "../Pages/DashboardPage/StocksPage/StockInPage/StockInPage";
+import StockOutPage from "../Pages/DashboardPage/StocksPage/StockOutPage/StockOutPage";
+import StocksPage from "../Pages/DashboardPage/StocksPage/StocksPage";
+import TotalStockPage from "../Pages/DashboardPage/StocksPage/TotalStockPage/TotalStockPage";
 import HomePage from "../Pages/FrontendPage/HomePage/HomePage";
 import Registration from "../Pages/FrontendPage/RegistrationPage/Registration";
 import PrivateRoute from "./PrivateRoute";
@@ -92,13 +97,27 @@ const router = createBrowserRouter([
                 path: "/dashboard/sales/customer3",
                 element: <SellProductPage></SellProductPage>,
               },
+            ],
+          },
+          {
+            path: "/dashboard/stocks",
+            element: <StocksPage></StocksPage>,
+            children: [
               {
-                path: "/dashboard/sales/customer4",
-                element: <SellProductPage></SellProductPage>,
+                path: "/dashboard/stocks/total",
+                element: <TotalStockPage></TotalStockPage>,
               },
               {
-                path: "/dashboard/sales/customer5",
-                element: <SellProductPage></SellProductPage>,
+                path: "/dashboard/stocks/addstocks",
+                element: <AddStocks></AddStocks>,
+              },
+              {
+                path: "/dashboard/stocks/stocksin",
+                element: <StockInPage></StockInPage>,
+              },
+              {
+                path: "/dashboard/stocks/stocksout",
+                element: <StockOutPage></StockOutPage>,
               },
             ],
           },

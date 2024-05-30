@@ -51,15 +51,14 @@ const SearchProductSaleComp = ({
     const result = oldCart.find(
       (product) => product.productId === searchResult?.productId
     );
-
     if (result) {
       toast.error("alrady Exist");
     } else {
       localStorage.setItem(lastElement, JSON.stringify([...oldCart, cartData]));
     }
-
-    const searchInput = document.getElementById("searchProductId");
-
+    const searchInput = document.getElementById(
+      "searchProductIdForProductSerach"
+    );
     searchInput.value = "";
     setSearchResult({});
     setSearchText(0);
