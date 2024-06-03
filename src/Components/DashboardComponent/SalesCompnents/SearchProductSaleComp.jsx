@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { AuthState } from "../../../contexts/AuthProvider";
 import { getStoredData } from "../../../utils/localStorage";
-
 const SearchProductSaleComp = ({
   searchResult,
   lastElement,
@@ -37,19 +36,21 @@ const SearchProductSaleComp = ({
     };
   }, []);
 
-  const handeladdToCart = (searchResult) => {
+  const handeladdToCart = (product) => {
+    console.log(product);
     const cartData = {
-      productId: searchResult?.productId,
-      productName: searchResult?.productName,
-      weight: searchResult?.weight,
-      weightUnit: searchResult?.weightUnit,
-      regularPrice: searchResult?.regularPrice,
-      discount: searchResult?.discount,
+      productId: product?.productIdNumber,
+      stockId: product?._id,
+      productName: product?.product?.productName,
+      weight: product?.product?.weight,
+      weightUnit: product?.product?.weightUnit,
+      regularPrice: product?.regularPrice,
+      discount: product?.discount,
       orderQuentity: 1,
     };
     let oldCart = getStoredData(lastElement);
     const result = oldCart.find(
-      (product) => product.productId === searchResult?.productId
+      (product) => product.stockId === cartData?.stockId
     );
     if (result) {
       toast.error("alrady Exist");
@@ -60,36 +61,43 @@ const SearchProductSaleComp = ({
       "searchProductIdForProductSerach"
     );
     searchInput.value = "";
-    setSearchResult({});
+    setSearchResult([]);
     setSearchText(0);
     setReload(reload + 1);
   };
-
+  console.log(searchResult);
   return (
     <div className="">
-      <div className="border shadow-md p-2">
-        <div>
-          <div className="flex justify-between items-center">
-            <div className="max-w-16 max-h-16">
-              <img
-                className="rounded-md"
-                src={searchResult?.productImage}
-                alt=""
-              />
-            </div>
-            <p>{searchResult?.productName}</p>
-            <p>{searchResult?.regularPrice}Tk</p>
+      <div>
+        {searchResult?.map((product) => (
+          <div key={product?._id}>
+            <div className="border shadow-md p-2">
+              <div>
+                <div className="flex justify-between items-center">
+                  <div className="max-w-16 max-h-16">
+                    <img
+                      className="rounded-md"
+                      src={product?.product?.productImage}
+                      alt=""
+                    />
+                  </div>
+                  <p>{product?.product?.productName}</p>
+                  <p>{product?.quantity}</p>
+                  <p>{product?.regularPrice} Tk</p>
 
-            <button
-              className="px-2 py-1 bg-orange-600 hover:bg-orange-800 duration-200 text-white rounded"
-              ref={buttonRef}
-              onClick={() => handeladdToCart(searchResult)}
-            >
-              add To Cart
-            </button>
-            <p></p>
+                  <button
+                    className="px-2 py-1 bg-orange-600 hover:bg-orange-800 duration-200 text-white rounded"
+                    ref={buttonRef}
+                    onClick={() => handeladdToCart(product)}
+                  >
+                    add To Cart
+                  </button>
+                  <p></p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

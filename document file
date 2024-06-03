@@ -112,3 +112,13 @@ product:{
       "regularPrice":30,
       "discount":0%,
     }
+
+
+    prit_order{
+      productId: "",
+      stockId:"",
+      less:"",
+      totalTk:"",
+
+
+    }

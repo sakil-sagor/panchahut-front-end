@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import ProductSearchSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/ProductSearchSaleComp";
 import SearchProductSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/SearchProductSaleComp";
 import SelectedUserForCart from "../../../../Components/DashboardComponent/SalesCompnents/SelectedUserForCart";
+import blue from "../../../../assets/blue.gif";
 import { AuthState } from "../../../../contexts/AuthProvider";
 import useButtonPrintP from "../../../../hooks/useButtonPrintP";
 import useUserFind from "../../../../hooks/useUserFind";
@@ -16,24 +17,28 @@ const SellProductPage = () => {
   const [selectedUserCart1, setSelectedUserCart1] = useState({});
   const [selectedUserCart2, setSelectedUserCart2] = useState({});
   const [selectedUserCart3, setSelectedUserCart3] = useState({});
-  const [guest, setGuest] = useState("guest");
+  const [less, setLess] = useState(0);
+  const [discountBox, setDiscountBox] = useState(false);
   const [searchText, setSearchText] = useState(0);
-  const [searchResult, setSearchResult] = useState({});
+  const [searchResult, setSearchResult] = useState([]);
   const [addToCart, setAddToCart] = useState([]);
   const [reload, setReload] = useState(0);
   const pathname = location.pathname;
   const pathSegments = pathname.split("/").filter((segment) => segment);
   const [lastElement] = pathSegments.slice(-1);
   const buttonRefP = useButtonPrintP();
+  const [loading, setLoading] = useState(false);
 
   // get the search product
   useEffect(() => {
+    console.log(searchText);
     if (searchText) {
-      const url = `http://localhost:5000/api/v1/product/${searchText}`;
+      const url = `http://localhost:5000/api/v1/sales/${searchText}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          setSearchResult(data.data);
+          console.log(data?.data);
+          setSearchResult(data?.data);
         });
     }
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -45,10 +50,11 @@ const SellProductPage = () => {
     setAddToCart(result);
   }, [lastElement, reload]);
 
-  const handelCountQuentity = async (productId, boolean) => {
+  const handelCountQuentity = async (stockId, boolean) => {
     // get the product from database
+    console.log(stockId, boolean);
     let newResult;
-    const url = `http://localhost:5000/api/v1/product/${productId}`;
+    const url = `http://localhost:5000/api/v1/sales/salesforcountincart/${stockId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -59,7 +65,7 @@ const SellProductPage = () => {
 
     const result = getStoredData(lastElement);
     const plus = result.map((product) => {
-      if (product.productId === productId) {
+      if (product.stockId === stockId) {
         if (newResult.quantity === product.orderQuentity && boolean) {
           toast.error("Stock is empty,Can not add more.");
         } else {
@@ -85,10 +91,10 @@ const SellProductPage = () => {
     return totalSum;
   };
   // remove from cart list
-  const handelRemoveCart = (productId) => {
+  const handelRemoveCart = (stockId) => {
     const existingProduct = getStoredData(lastElement);
     const result = existingProduct.filter(
-      (product) => product.productId !== productId
+      (product) => product.stockId !== stockId
     );
     localStorage.setItem(lastElement, JSON.stringify(result));
     setReload(reload + 1);
@@ -109,9 +115,66 @@ const SellProductPage = () => {
     setUserPhone("");
   };
 
+  const handelLessTk = (boolean) => {
+    if (boolean) {
+      setDiscountBox(false);
+      setLess(0);
+    } else {
+      setDiscountBox(true);
+    }
+  };
+
   const handelPrinCart = () => {
     const orderdProduct = getStoredData(lastElement);
-    console.log(orderdProduct);
+
+    let customerId;
+    let customerPhone;
+
+    if (lastElement === "customer1") {
+      customerId = selectedUserCart1.userId;
+      customerPhone = selectedUserCart1.phone;
+    } else if (lastElement === "customer2") {
+      customerPhone = selectedUserCart2.phone;
+      customerId = userDetail.userId;
+    } else if (lastElement === "customer3") {
+      customerPhone = selectedUserCart3.phone;
+      customerId = userDetail.userId;
+    }
+
+    const totalOrder = {
+      manager: user?.userId,
+      totelPirice: totalPriceAll() - less,
+      orderdProduct,
+      phone: customerPhone ? customerPhone : "012345678912",
+      userId: customerId ? customerId : 1000,
+      less: less,
+    };
+    setLoading(true);
+
+    fetch("http://localhost:5000/api/v1/stocks/stockout", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(totalOrder),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          toast.success("success");
+          setLess(0);
+          setDiscountBox(false);
+          localStorage.setItem(lastElement, JSON.stringify([]));
+          setReload(reload + 1);
+          setLoading(false);
+        }
+
+        if (data.error) {
+          toast.error(" failed");
+          setLoading(false);
+          console.log(data.error);
+        }
+      });
   };
   return (
     <div className="p-2">
@@ -228,7 +291,7 @@ const SellProductPage = () => {
                         <div className="flex items-center gap-4 justify-center">
                           <CiSquarePlus
                             onClick={() =>
-                              handelCountQuentity(product?.productId, true)
+                              handelCountQuentity(product?.stockId, true)
                             }
                             className="text-4xl text-gray-500 cursor-pointer hover:text-gray-700"
                           />
@@ -238,7 +301,7 @@ const SellProductPage = () => {
                           </span>
                           <CiSquareMinus
                             onClick={() =>
-                              handelCountQuentity(product?.productId, false)
+                              handelCountQuentity(product?.stockId, false)
                             }
                             className="text-4xl text-gray-500 cursor-pointer  hover:text-gray-700"
                           />
@@ -250,7 +313,7 @@ const SellProductPage = () => {
                       </td>
                       <td
                         className="md:px-4 py-2 cursor-pointer  hover:text-red-700"
-                        onClick={() => handelRemoveCart(product.productId)}
+                        onClick={() => handelRemoveCart(product.stockId)}
                       >
                         <RxCross1 />
                       </td>
@@ -269,14 +332,63 @@ const SellProductPage = () => {
                   Tk
                 </p>
               </div>
+              <div className="flex justify-between ">
+                <div>
+                  <input
+                    type="checkbox"
+                    name="discountBox"
+                    id="discountBox"
+                    onChange={() => handelLessTk(discountBox)}
+                  />
+                  <label htmlFor="discountBox"> Discount </label>
+                </div>
+
+                {discountBox ? (
+                  <div className=" flex justify-end">
+                    <input
+                      className="w-1/2 text-right border border-gray-600 "
+                      type="number"
+                      onChange={(e) => setLess(e.target.value)}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+              <br />
+              <hr />
+              <div className="mx-6 ">
+                <p className="text-right">
+                  Total Amount:
+                  <span className="mx-2 font-bold text-orange-600">
+                    {totalPriceAll() - less}
+                  </span>
+                  Tk
+                </p>
+              </div>
               <div className="flex justify-center">
-                <button
-                  className="w-1/2 bg-sky-700 hover:bg-sky-900 duration-200 text-white rounded-md py-1"
+                <div
+                  className="w-1/2 mt-2 flex items-center justify-center h-10  bg-sky-700 hover:bg-sky-800 rounded"
                   ref={buttonRefP}
                   onClick={handelPrinCart}
                 >
-                  Print Order
-                </button>
+                  <button className=" ">
+                    <img
+                      className={`w-8 text-center  mx-auto ${
+                        !loading && "hidden"
+                      }`}
+                      src={blue}
+                      alt=""
+                    />
+                  </button>
+                  <button
+                    className={`w-full h-full  text-white py-18 ${
+                      loading && "hidden"
+                    }`}
+                  >
+                    <span> Print Order</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
