@@ -52,7 +52,7 @@ const SellProductPage = () => {
 
   const handelCountQuentity = async (stockId, boolean) => {
     // get the product from database
-    console.log(stockId, boolean);
+
     let newResult;
     const url = `http://localhost:5000/api/v1/sales/salesforcountincart/${stockId}`;
     try {
@@ -167,12 +167,13 @@ const SellProductPage = () => {
           localStorage.setItem(lastElement, JSON.stringify([]));
           setReload(reload + 1);
           setLoading(false);
+          
         }
 
         if (data.error) {
-          toast.error(" failed");
+          toast.error(data.error);
           setLoading(false);
-          console.log(data.error);
+          // console.log(data.error);
         }
       });
   };
