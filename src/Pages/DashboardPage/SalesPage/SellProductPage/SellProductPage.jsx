@@ -3,6 +3,7 @@ import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { useReactToPrint } from "react-to-print";
 import { toast } from "react-toastify";
+import AddNewUserSales from "../../../../Components/DashboardComponent/SalesCompnents/AddNewUserSales";
 import ProductSearchSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/ProductSearchSaleComp";
 import SearchProductSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/SearchProductSaleComp";
 import SelectedUserForCart from "../../../../Components/DashboardComponent/SalesCompnents/SelectedUserForCart";
@@ -187,7 +188,7 @@ const SellProductPage = () => {
   };
   return (
     <div className="p-2">
-      <div className=" flex gap-6">
+      <div className=" grid grid-cols-2 md:grid-cols-3  gap-6">
         <div className="flex gap-2">
           <div>
             <ProductSearchSaleComp
@@ -218,6 +219,9 @@ const SellProductPage = () => {
             )}
           </div>
         )}
+        <div>
+          <AddNewUserSales setUserDetail={setUserDetail}></AddNewUserSales>
+        </div>
       </div>
       <hr className="my-2" />
       <div className="grid grid-cols-2">
