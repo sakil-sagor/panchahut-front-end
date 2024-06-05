@@ -34,7 +34,11 @@ const AddStocks = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const productData = { ...formData, productIdNumber: getProduct.productId };
+    const productData = {
+      ...formData,
+      productIdNumber: getProduct?.productId,
+      productName: getProduct?.productName,
+    };
     fetch("http://localhost:5000/api/v1/stocks/create", {
       method: "POST",
       headers: {
@@ -49,10 +53,10 @@ const AddStocks = () => {
           setFormData({
             costingPrice: "",
             regularPrice: "",
-
             quantity: "",
           });
           setSearchText("");
+          setSearchResult({});
           setLoading(false);
         }
 
@@ -74,32 +78,33 @@ const AddStocks = () => {
             idName="searchProductIdForProductSerach"
           ></ProductSearchSaleComp>
         </div>
+        {searchResult?.productId && (
+          <div className="">
+            <div className="border shadow-md p-2">
+              <div>
+                <div className="flex justify-between items-center">
+                  <div className="max-w-16 max-h-16">
+                    <img
+                      className="rounded-md"
+                      src={searchResult?.productImage}
+                      alt=""
+                    />
+                  </div>
+                  <p>{searchResult?.productName}</p>
+                  <p>{searchResult?.regularPrice}Tk</p>
 
-        <div className="">
-          <div className="border shadow-md p-2">
-            <div>
-              <div className="flex justify-between items-center">
-                <div className="max-w-16 max-h-16">
-                  <img
-                    className="rounded-md"
-                    src={searchResult?.productImage}
-                    alt=""
-                  />
+                  <button
+                    className="px-2 py-1 bg-orange-600 hover:bg-orange-800 duration-200 text-white rounded"
+                    onClick={() => setGetProduct(searchResult)}
+                  >
+                    add To Cart
+                  </button>
+                  <p></p>
                 </div>
-                <p>{searchResult?.productName}</p>
-                <p>{searchResult?.regularPrice}Tk</p>
-
-                <button
-                  className="px-2 py-1 bg-orange-600 hover:bg-orange-800 duration-200 text-white rounded"
-                  onClick={() => setGetProduct(searchResult)}
-                >
-                  add To Cart
-                </button>
-                <p></p>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="mt-4">
         <form

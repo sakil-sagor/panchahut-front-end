@@ -1,4 +1,5 @@
 import React from "react";
+import { RxCross1 } from "react-icons/rx";
 
 const SelectedUserForCart = ({ selectedUserCart, setSelectedUserCart }) => {
   const handelUserAddtoCart = () => {
@@ -23,7 +24,7 @@ const SelectedUserForCart = ({ selectedUserCart, setSelectedUserCart }) => {
             onClick={() => handelUserAddtoCart()}
             className=" bg-red-600 px-2 text-white rounded hover:bg-red-700 duration-200 "
           >
-            Remove
+            <RxCross1 />
           </button>
         )}
       </div>

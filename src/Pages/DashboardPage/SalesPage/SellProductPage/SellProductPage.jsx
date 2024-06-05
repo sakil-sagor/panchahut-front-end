@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
+import { useReactToPrint } from "react-to-print";
 import { toast } from "react-toastify";
 import ProductSearchSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/ProductSearchSaleComp";
 import SearchProductSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/SearchProductSaleComp";
@@ -26,14 +27,14 @@ const SellProductPage = () => {
   const pathname = location.pathname;
   const pathSegments = pathname.split("/").filter((segment) => segment);
   const [lastElement] = pathSegments.slice(-1);
-  const buttonRefP = useButtonPrintP();
+  const { buttonRefCtrlEnter, buttonRefPlus } = useButtonPrintP();
   const [loading, setLoading] = useState(false);
-
+  const componentRef = useRef();
   // get the search product
   useEffect(() => {
     console.log(searchText);
     if (searchText) {
-      const url = `http://localhost:5000/api/v1/sales/${searchText}`;
+      const url = `https://panchahut-server.vercel.app/api/v1/sales/${searchText}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -54,7 +55,7 @@ const SellProductPage = () => {
     // get the product from database
 
     let newResult;
-    const url = `http://localhost:5000/api/v1/sales/salesforcountincart/${stockId}`;
+    const url = `https://panchahut-server.vercel.app/api/v1/sales/salesforcountincart/${stockId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -123,9 +124,16 @@ const SellProductPage = () => {
       setDiscountBox(true);
     }
   };
-
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   const handelPrinCart = () => {
+    setLoading(true);
     const orderdProduct = getStoredData(lastElement);
+    if (orderdProduct.length <= 0) {
+      toast.warning("Please add item in cart..");
+      return;
+    }
 
     let customerId;
     let customerPhone;
@@ -151,7 +159,7 @@ const SellProductPage = () => {
     };
     setLoading(true);
 
-    fetch("http://localhost:5000/api/v1/stocks/stockout", {
+    fetch("https://panchahut-server.vercel.app/api/v1/stocks/stockout", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -167,7 +175,7 @@ const SellProductPage = () => {
           localStorage.setItem(lastElement, JSON.stringify([]));
           setReload(reload + 1);
           setLoading(false);
-          
+          handlePrint();
         }
 
         if (data.error) {
@@ -184,6 +192,7 @@ const SellProductPage = () => {
           <div>
             <ProductSearchSaleComp
               setSearchText={setUserPhone}
+              buttonRefPlus={buttonRefPlus}
               placeHolder="User Phone Number"
               idName="searchProductIdForUserSerach"
             ></ProductSearchSaleComp>
@@ -198,6 +207,7 @@ const SellProductPage = () => {
                   <p>name: {userDetail?.fullName}</p>
                   <p>Phone: {userDetail?.phone}</p>
                   <button
+                    ref={buttonRefPlus}
                     onClick={() => handelUserAddtoCart(userDetail)}
                     className=" bg-green-600 px-2 text-white rounded hover:bg-green-700 duration-200 hover:text-xl"
                   >
@@ -234,8 +244,8 @@ const SellProductPage = () => {
             ""
           )}
         </div>
-        <div className="">
-          {addToCart.length > 0 && (
+        <div>
+          <div className="" ref={componentRef}>
             <div>
               <div className="">
                 {selectedUserCart1?.pathName === lastElement && (
@@ -271,56 +281,57 @@ const SellProductPage = () => {
                     <th className="px-4 py-2"></th>
                   </tr>
                 </thead>
-
-                <tbody>
-                  {addToCart?.map((product, index) => (
-                    <tr
-                      key={index}
-                      className={index % 2 === 0 ? "bg-gray-200" : ""}
-                    >
-                      <td className="px-4 py-2 text-left">
-                        {product?.productId}
-                      </td>
-                      <td className="px-4 py-2 text-left">
-                        {product?.productName}
-                      </td>
-
-                      <td className="px-4 py-2 text-blue-700 font-semibold">
-                        {product?.regularPrice} Tk
-                      </td>
-                      <td className=" text-orange-700 ">
-                        <div className="flex items-center gap-4 justify-center">
-                          <CiSquarePlus
-                            onClick={() =>
-                              handelCountQuentity(product?.stockId, true)
-                            }
-                            className="text-4xl text-gray-500 cursor-pointer hover:text-gray-700"
-                          />
-
-                          <span className="font-bold">
-                            {product.orderQuentity}
-                          </span>
-                          <CiSquareMinus
-                            onClick={() =>
-                              handelCountQuentity(product?.stockId, false)
-                            }
-                            className="text-4xl text-gray-500 cursor-pointer  hover:text-gray-700"
-                          />
-                        </div>
-                      </td>
-
-                      <td className="md:px-4 py-2">
-                        {product?.regularPrice * product.orderQuentity}
-                      </td>
-                      <td
-                        className="md:px-4 py-2 cursor-pointer  hover:text-red-700"
-                        onClick={() => handelRemoveCart(product.stockId)}
+                {addToCart.length > 0 && (
+                  <tbody>
+                    {addToCart?.map((product, index) => (
+                      <tr
+                        key={index}
+                        className={index % 2 === 0 ? "bg-gray-200" : ""}
                       >
-                        <RxCross1 />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                        <td className="px-4 py-2 text-left">
+                          {product?.productId}
+                        </td>
+                        <td className="px-4 py-2 text-left">
+                          {product?.productName}
+                        </td>
+
+                        <td className="px-4 py-2 text-blue-700 font-semibold">
+                          {product?.regularPrice} Tk
+                        </td>
+                        <td className=" text-orange-700 ">
+                          <div className="flex items-center gap-4 justify-center">
+                            <CiSquarePlus
+                              onClick={() =>
+                                handelCountQuentity(product?.stockId, true)
+                              }
+                              className="text-4xl text-gray-500 cursor-pointer hover:text-gray-700"
+                            />
+
+                            <span className="font-bold">
+                              {product.orderQuentity}
+                            </span>
+                            <CiSquareMinus
+                              onClick={() =>
+                                handelCountQuentity(product?.stockId, false)
+                              }
+                              className="text-4xl text-gray-500 cursor-pointer  hover:text-gray-700"
+                            />
+                          </div>
+                        </td>
+
+                        <td className="md:px-4 py-2">
+                          {product?.regularPrice * product.orderQuentity}
+                        </td>
+                        <td
+                          className="md:px-4 py-2 cursor-pointer  hover:text-red-700"
+                          onClick={() => handelRemoveCart(product.stockId)}
+                        >
+                          <RxCross1 />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}
               </table>
               <br />
               <hr />
@@ -367,32 +378,32 @@ const SellProductPage = () => {
                   Tk
                 </p>
               </div>
-              <div className="flex justify-center">
-                <div
-                  className="w-1/2 mt-2 flex items-center justify-center h-10  bg-sky-700 hover:bg-sky-800 rounded"
-                  ref={buttonRefP}
-                  onClick={handelPrinCart}
-                >
-                  <button className=" ">
-                    <img
-                      className={`w-8 text-center  mx-auto ${
-                        !loading && "hidden"
-                      }`}
-                      src={blue}
-                      alt=""
-                    />
-                  </button>
-                  <button
-                    className={`w-full h-full  text-white py-18 ${
-                      loading && "hidden"
-                    }`}
-                  >
-                    <span> Print Order</span>
-                  </button>
-                </div>
-              </div>
             </div>
-          )}
+          </div>
+          {/* {addToCart.length > 0 && ( */}
+          <div className="flex justify-center ">
+            <div
+              className="w-1/2 mt-2 flex items-center justify-center h-10  bg-sky-700 hover:bg-sky-800 rounded disabled"
+              ref={buttonRefCtrlEnter}
+              onClick={!loading && handelPrinCart}
+            >
+              <button className=" ">
+                <img
+                  className={`w-8 text-center  mx-auto ${!loading && "hidden"}`}
+                  src={blue}
+                  alt=""
+                />
+              </button>
+              <button
+                className={`w-full h-full  text-white py-18 ${
+                  loading && "hidden"
+                }`}
+              >
+                <span> Print Order</span>
+              </button>
+            </div>
+          </div>
+          {/* )} */}
         </div>
       </div>
     </div>

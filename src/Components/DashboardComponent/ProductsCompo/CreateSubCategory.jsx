@@ -24,13 +24,16 @@ const CreateSubCategory = ({ data }) => {
 
     // Other registration form submission logic
 
-    fetch("http://localhost:5000/api/v1/category/createsubcategory", {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    fetch(
+      "https://panchahut-server.vercel.app/api/v1/category/createsubcategory",
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {

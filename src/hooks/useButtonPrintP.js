@@ -2,12 +2,20 @@ import { useEffect, useRef } from "react";
 
 // Custom hook to handle keydown event
 const useButtonPrintP = () => {
-  const buttonRef = useRef(null);
+  const buttonRefCtrlEnter = useRef(null);
+  const buttonRefPlus = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.ctrlKey && event.key === "Enter" && buttonRef.current) {
-        buttonRef.current.click();
+      if (
+        event.ctrlKey &&
+        event.key === "Enter" &&
+        buttonRefCtrlEnter.current
+      ) {
+        buttonRefCtrlEnter.current.click();
+      }
+      if (event.key === "+" && buttonRefPlus.current) {
+        buttonRefPlus.current.click();
       }
     };
 
@@ -17,6 +25,6 @@ const useButtonPrintP = () => {
     };
   }, []);
 
-  return buttonRef;
+  return { buttonRefCtrlEnter, buttonRefPlus };
 };
 export default useButtonPrintP;
