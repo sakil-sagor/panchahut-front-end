@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductsDetail = ({ product }) => {
   const {
-    productId,
+    productIdNumber,
     productName,
     productNameBangla,
     description,
@@ -21,7 +21,7 @@ const ProductsDetail = ({ product }) => {
   } = product;
 
   return (
-    <dialog id={`my_modal_${productId}`} className="modal  fixed">
+    <dialog id={`my_modal_${productIdNumber}`} className="modal  fixed">
       <div className="modal-box w-11/12 max-w-5xl ">
         <div className="flex justify-end">
           <form method="dialog">

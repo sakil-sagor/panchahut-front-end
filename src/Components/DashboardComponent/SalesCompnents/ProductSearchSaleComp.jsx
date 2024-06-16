@@ -3,7 +3,7 @@ import React from "react";
 const ProductSearchSaleComp = ({ setSearchText, placeHolder, idName }) => {
   return (
     <div>
-      <div className="mb-2">
+      <div className="">
         <input
           id={idName}
           placeholder={placeHolder}

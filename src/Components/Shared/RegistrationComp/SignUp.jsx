@@ -28,7 +28,7 @@ const SignUp = ({ loginArea }) => {
 
       return;
     }
-    console.log(formData);
+
     fetch(" https://panchahut-server.vercel.app/api/v1/user/createuser", {
       method: "POST",
       headers: {

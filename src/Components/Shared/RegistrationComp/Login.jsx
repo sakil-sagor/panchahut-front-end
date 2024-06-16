@@ -31,10 +31,6 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      2;
-      // Assuming you want to log the response data
-      console.log(response.data);
-      console.log(response.data.success);
 
       if (response.data.success) {
         localStorage.setItem("data", JSON.stringify(response.data.userData));

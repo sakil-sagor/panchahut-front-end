@@ -77,7 +77,7 @@ const CreateProduct = () => {
       category: getCategory,
       productImage: imageUrl,
     };
-    console.log(productData);
+
     fetch("https://panchahut-server.vercel.app/api/v1/product/create", {
       method: "POST",
       headers: {
@@ -107,7 +107,6 @@ const CreateProduct = () => {
         if (data.error) {
           toast.error(" failed");
           setLoading(false);
-          console.log(data.error);
         }
       });
   };

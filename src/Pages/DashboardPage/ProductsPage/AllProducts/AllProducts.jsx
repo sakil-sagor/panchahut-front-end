@@ -42,15 +42,19 @@ const AllProducts = () => {
                   <tr className="text-left">
                     <th className="px-4 py-2">ID</th>
                     <th className="px-4 py-2">Name</th>
-                    <th className="px-4 py-2">Subject</th>
-                    <th className="px-4 py-2">View Profile</th>
+                    <th className="px-4 py-2">Quantity</th>
+                    <th className="px-4 py-2">Costing Price</th>
+                    <th className="px-4 py-2"> Discount</th>
+                    <th className="px-4 py-2">Selling Price</th>
+                    <th className="px-4 py-2">View Product</th>
+                    <th className="px-4 py-2">Print</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {allProducts?.result?.map((product, index) => (
                     <SingleProduct
-                      key={product.id}
+                      key={product._id}
                       index={index}
                       product={product}
                     ></SingleProduct>
