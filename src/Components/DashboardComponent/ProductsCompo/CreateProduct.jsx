@@ -78,7 +78,7 @@ const CreateProduct = () => {
       productImage: imageUrl,
     };
 
-    fetch("https://panchahut-server.vercel.app/api/v1/product/create", {
+    fetch("http://localhost:5000/api/v1/product/create", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -107,6 +107,7 @@ const CreateProduct = () => {
         if (data.error) {
           toast.error(" failed");
           setLoading(false);
+          console.log(data.error);
         }
       });
   };
@@ -128,19 +129,6 @@ const CreateProduct = () => {
                   onSubmit={handleSubmit}
                 >
                   <div className="flex  items-center justify-between ">
-                    {/* <div className="flex items-end justify-between">
-                      <div className=" mt-2">
-                        <label className=" text-gray-600 font-semibold  ">
-                          Admin Name
-                        </label>
-                        <input
-                          className="py-1 w-full  px-2 rounded-md border border-gray-300"
-                          type="text"
-                          value={user?.fullName}
-                        />
-                      </div>
-                    </div> */}
-
                     <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
@@ -193,58 +181,6 @@ const CreateProduct = () => {
                   </div>
 
                   <div className="grid grid-cols-2 lg:grid-cols-3 items-center justify-between">
-                    {/* <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="costingPrice"
-                      >
-                        Costing Price
-                      </label>
-                      <input
-                        className="py-1 block  px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="costingPrice"
-                        placeholder="Costing Price"
-                        value={formData.costingPrice}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="regularPrice"
-                      >
-                        Regular Price
-                      </label>
-                      <input
-                        className="py-1 block  px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="regularPrice"
-                        placeholder="  Regular Price"
-                        value={formData.regularPrice}
-                        onChange={handleInputChange}
-                      />
-                    </div> */}
-
-                    {/* <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="discount"
-                      >
-                        Discount
-                      </label>
-                      <input
-                        className="py-1 block w-full md:w-3/4  px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="discount"
-                        value={formData.discount}
-                        onChange={handleInputChange}
-                      />
-                    </div> */}
-
                     <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
@@ -352,24 +288,6 @@ const CreateProduct = () => {
                         <option value="pice">Pice</option>
                       </select>
                     </div>
-
-                    {/* <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="quantity"
-                      >
-                        Quantity
-                      </label>
-                      <input
-                        className="py-1 block w-full md:w-3/4 px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="quantity"
-                        placeholder="0"
-                        value={formData.quantity}
-                        onChange={handleInputChange}
-                      />
-                    </div> */}
                   </div>
 
                   <div className="flex flex-col w-full mt-2">

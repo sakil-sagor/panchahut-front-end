@@ -42,7 +42,18 @@ const SingleProduct = ({ product, index }) => {
           className="cursor-pointer flex gap-1 justify-between bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 text-sm"
         >
           <div>
-            <span>Print</span>
+            <span>Add_Stock</span>
+          </div>
+        </div>
+        <PrintBarCode product={product}></PrintBarCode>
+      </td>
+      <td className="md:px-4 py-2">
+        <div
+          onClick={() => document.getElementById(`my_modal_${_id}`).showModal()}
+          className="cursor-pointer flex gap-1 justify-between bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 text-sm"
+        >
+          <div>
+            <span>Barcode</span>
           </div>
         </div>
         <PrintBarCode product={product}></PrintBarCode>

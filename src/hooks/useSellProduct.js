@@ -10,7 +10,7 @@ const useSellProduct = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://panchahut-server.vercel.app/api/v1/sales/searchsellproduct/"
+          "http://localhost:5000/api/v1/sales/searchsellproduct/"
         );
         const data = await response.json();
 

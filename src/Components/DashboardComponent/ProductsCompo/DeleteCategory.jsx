@@ -7,7 +7,7 @@ const DeleteCategory = ({ data }) => {
   const handleRemovecategory = async (id) => {
     setLoading(true);
     if (id) {
-      const url = `https://panchahut-server.vercel.app/api/v1/category/${id}`;
+      const url = `http://localhost:5000/api/v1/category/${id}`;
 
       fetch(url, {
         method: "DELETE",
@@ -26,7 +26,7 @@ const DeleteCategory = ({ data }) => {
   const handleRemoveSubcategory = async (id, name) => {
     if (id) {
       const deletedData = { categoryId: id, subName: name };
-      const url = `https://panchahut-server.vercel.app/api/v1/category/deletesubcategory`;
+      const url = `http://localhost:5000/api/v1/category/deletesubcategory`;
       fetch(url, {
         method: "PUT",
         headers: {

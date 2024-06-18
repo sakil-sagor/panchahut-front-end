@@ -47,7 +47,9 @@ const AllProducts = () => {
                     <th className="px-4 py-2"> Discount</th>
                     <th className="px-4 py-2">Selling Price</th>
                     <th className="px-4 py-2">View Product</th>
-                    <th className="px-4 py-2">Print</th>
+                    <th className="px-4 py-2">Add Stock</th>
+
+                    <th className="px-4 py-2">Barcode</th>
                   </tr>
                 </thead>
 
