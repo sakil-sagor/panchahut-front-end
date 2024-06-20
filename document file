@@ -92,7 +92,7 @@ product:{
   "subCategory":"asdkjfasdkjf",
   "weight":25, N/A,
   "weightUnit":"kg,liter,pice",
-  "available":"available,sold-out",
+
   "featured":"true,false",
   "status":"active,pending,stock",
 }
@@ -103,6 +103,7 @@ product:{
       "costingPrice":20,
       "regularPrice":25,
       "discount":0%,
+        "available":"available,sold-out",
     }
 
         {

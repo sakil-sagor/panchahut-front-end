@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
       if (userInfo?.phone) {
         try {
           const response = await axiosSecure.get(
-            `https://panchahut-server.vercel.app/api/v1/user/${userInfo?.phone}`,
+            `http://localhost:5000/api/v1/user/${userInfo?.phone}`,
             {
               withCredentials: true,
             }

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
 import { AuthState } from "../../../contexts/AuthProvider";
 import { getStoredData } from "../../../utils/localStorage";
 const SearchProductSaleComp = ({
@@ -11,18 +10,8 @@ const SearchProductSaleComp = ({
   setSearchText,
 }) => {
   const { user } = AuthState();
-  //   const pathname = location.pathname;
-  //   const pathSegments = pathname.split("/").filter((segment) => segment);
-  //   const [lastElement] = pathSegments.slice(-1);
   const [count, setCount] = useState(1);
-  //   const [reload, setReload] = useState(0);
-
   const buttonRef = useRef(null);
-
-  //   useEffect(() => {
-  //     const result = getStoredData(lastElement);
-  //     setAddToCart(result);
-  //   }, [lastElement, reload]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -37,10 +26,9 @@ const SearchProductSaleComp = ({
   }, []);
 
   const handeladdToCart = (product) => {
-    console.log(product);
     const cartData = {
       productId: product?.productIdNumber,
-      stockId: product?._id,
+      stockId: product?.stockId,
       productName: product?.product?.productName,
       weight: product?.product?.weight,
       weightUnit: product?.product?.weightUnit,
@@ -49,11 +37,13 @@ const SearchProductSaleComp = ({
       orderQuentity: 1,
     };
     let oldCart = getStoredData(lastElement);
-    const result = oldCart.find(
+    const productIndex = oldCart.findIndex(
       (product) => product.stockId === cartData?.stockId
     );
-    if (result) {
-      toast.error("alrady Exist");
+
+    if (productIndex !== -1) {
+      oldCart[productIndex].orderQuentity += 1;
+      localStorage.setItem(lastElement, JSON.stringify(oldCart));
     } else {
       localStorage.setItem(lastElement, JSON.stringify([...oldCart, cartData]));
     }
@@ -65,7 +55,7 @@ const SearchProductSaleComp = ({
     setSearchText(0);
     setReload(reload + 1);
   };
-  console.log(searchResult);
+
   return (
     <div className="">
       <div>

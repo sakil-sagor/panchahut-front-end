@@ -77,8 +77,8 @@ const CreateProduct = () => {
       category: getCategory,
       productImage: imageUrl,
     };
-    console.log(productData);
-    fetch("https://panchahut-server.vercel.app/api/v1/product/create", {
+
+    fetch("http://localhost:5000/api/v1/product/create", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -118,42 +118,31 @@ const CreateProduct = () => {
   );
 
   return (
-    <div className="bg-sky-50 min-h-screen">
+    <div className="min-h-screen">
       <div className="   pb-24 ">
         <div className="  ">
-          <div className="bg-sky-50 ">
+          <div className=" ">
             <div className=" ">
               <div className=" m-4 ">
                 <form
-                  className=" border shadow-xl shadow-sky-300 p-2  rounded-md"
+                  className=" border shadow-xl  p-2  rounded-md"
                   onSubmit={handleSubmit}
                 >
                   <div className="flex  items-center justify-between ">
-                    {/* <div className="flex items-end justify-between">
-                      <div className=" mt-2">
-                        <label className=" text-gray-600 font-semibold  ">
-                          Admin Name
-                        </label>
-                        <input
-                          className="py-1 w-full  px-2 rounded-md border border-gray-300"
-                          type="text"
-                          value={user?.fullName}
-                        />
-                      </div>
-                    </div> */}
-
                     <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
                         htmlFor="productName"
                       >
-                        Product Name
+                        Product Name{" "}
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <input
                         className="py-1 w-full  px-2 rounded-md border border-gray-300"
                         type="text"
                         name="productName"
                         placeholder="Prodcut name "
+                        required
                         value={formData.productName}
                         onChange={handleInputChange}
                       />
@@ -182,9 +171,11 @@ const CreateProduct = () => {
                         htmlFor="image"
                       >
                         Image
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <input
                         id="image"
+                        required
                         className="py-1 rounded-md"
                         type="file"
                         accept="image/*"
@@ -194,58 +185,6 @@ const CreateProduct = () => {
                   </div>
 
                   <div className="grid grid-cols-2 lg:grid-cols-3 items-center justify-between">
-                    {/* <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="costingPrice"
-                      >
-                        Costing Price
-                      </label>
-                      <input
-                        className="py-1 block  px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="costingPrice"
-                        placeholder="Costing Price"
-                        value={formData.costingPrice}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="regularPrice"
-                      >
-                        Regular Price
-                      </label>
-                      <input
-                        className="py-1 block  px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="regularPrice"
-                        placeholder="  Regular Price"
-                        value={formData.regularPrice}
-                        onChange={handleInputChange}
-                      />
-                    </div> */}
-
-                    {/* <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="discount"
-                      >
-                        Discount
-                      </label>
-                      <input
-                        className="py-1 block w-full md:w-3/4  px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="discount"
-                        value={formData.discount}
-                        onChange={handleInputChange}
-                      />
-                    </div> */}
-
                     <div className=" mt-2">
                       <label
                         className=" text-gray-600 font-semibold  "
@@ -270,7 +209,7 @@ const CreateProduct = () => {
                         Category
                       </label>
                       <select
-                        className="py-2 px-4  text-lg  required rounded-md "
+                        className="py-2 px-4  text-lg   rounded-md "
                         name="categoryId"
                         value={formData.category}
                         onChange={(e) => setGetCategory(e.target.value)}
@@ -293,7 +232,7 @@ const CreateProduct = () => {
                         Sub-Category
                       </label>
                       <select
-                        className="py-2 px-4  text-lg  required rounded-md "
+                        className="py-2 px-4  text-lg   rounded-md "
                         name="subcategory"
                         placeholder="Sub-Category"
                         value={formData.subcategory}
@@ -317,11 +256,13 @@ const CreateProduct = () => {
                         htmlFor="weight"
                       >
                         Weight
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <input
                         className="py-1 block  px-2 rounded-md border border-gray-300"
                         type="number"
                         min="0"
+                        required
                         name="weight"
                         placeholder="Weight"
                         value={formData.weight}
@@ -334,6 +275,7 @@ const CreateProduct = () => {
                         htmlFor="weightUnit"
                       >
                         Weight Unit
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <select
                         name="weightUnit"
@@ -353,24 +295,6 @@ const CreateProduct = () => {
                         <option value="pice">Pice</option>
                       </select>
                     </div>
-
-                    {/* <div className=" mt-2">
-                      <label
-                        className=" text-gray-600 font-semibold  "
-                        htmlFor="quantity"
-                      >
-                        Quantity
-                      </label>
-                      <input
-                        className="py-1 block w-full md:w-3/4 px-2 rounded-md border border-gray-300"
-                        type="number"
-                        min="0"
-                        name="quantity"
-                        placeholder="0"
-                        value={formData.quantity}
-                        onChange={handleInputChange}
-                      />
-                    </div> */}
                   </div>
 
                   <div className="flex flex-col w-full mt-2">
@@ -381,7 +305,6 @@ const CreateProduct = () => {
                       Description
                     </label>
                     <textarea
-                      required
                       className="py-1 rounded-md  px-2  border border-gray-300"
                       name="description"
                       id="description"
@@ -393,22 +316,19 @@ const CreateProduct = () => {
                     ></textarea>
                   </div>
                   <div className=" mt-4 ">
-                    <div className="flex items-center justify-center h-10  bg-sky-800 rounded">
-                      <button className=" ">
-                        <img
-                          className={`w-8 text-center  mx-auto ${
-                            !loading && "hidden"
-                          }`}
-                          src={blue}
-                          alt=""
-                        />
-                      </button>
+                    <div className="  ">
                       <button
-                        className={`w-full h-full  text-white py-18 ${
-                          loading && "hidden"
-                        }`}
+                        className={`flex justify-center items-center mx-auto w-36 h-8 text-white px-4 py-1 bg-sky-700 hover:bg-sky-900 duration-200 rounded `}
                       >
-                        <span>Add Product</span>
+                        {loading ? (
+                          <img
+                            className={`w-8 h-8 text-center  mx-auto `}
+                            src={blue}
+                            alt=""
+                          />
+                        ) : (
+                          <span>Create Product</span>
+                        )}
                       </button>
                     </div>
                   </div>

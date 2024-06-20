@@ -7,6 +7,8 @@ import AddNewUserSales from "../../../../Components/DashboardComponent/SalesComp
 import ProductSearchSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/ProductSearchSaleComp";
 import SearchProductSaleComp from "../../../../Components/DashboardComponent/SalesCompnents/SearchProductSaleComp";
 import SelectedUserForCart from "../../../../Components/DashboardComponent/SalesCompnents/SelectedUserForCart";
+
+import BarcodeScanner from "../../../../Components/Shared/Barcode/BarcodeScanner ";
 import blue from "../../../../assets/blue.gif";
 import { AuthState } from "../../../../contexts/AuthProvider";
 import useButtonPrintP from "../../../../hooks/useButtonPrintP";
@@ -20,6 +22,7 @@ const SellProductPage = () => {
   const [selectedUserCart2, setSelectedUserCart2] = useState({});
   const [selectedUserCart3, setSelectedUserCart3] = useState({});
   const [less, setLess] = useState(0);
+  const [receiveTk, seReceiveTk] = useState(0);
   const [discountBox, setDiscountBox] = useState(false);
   const [searchText, setSearchText] = useState(0);
   const [searchResult, setSearchResult] = useState([]);
@@ -31,15 +34,15 @@ const SellProductPage = () => {
   const { buttonRefCtrlEnter, buttonRefPlus } = useButtonPrintP();
   const [loading, setLoading] = useState(false);
   const componentRef = useRef();
+  const inputRef = useRef(null);
+
   // get the search product
   useEffect(() => {
-    console.log(searchText);
     if (searchText) {
-      const url = `https://panchahut-server.vercel.app/api/v1/sales/${searchText}`;
+      const url = `http://localhost:5000/api/v1/sales/${searchText}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data?.data);
           setSearchResult(data?.data);
         });
     }
@@ -56,7 +59,7 @@ const SellProductPage = () => {
     // get the product from database
 
     let newResult;
-    const url = `https://panchahut-server.vercel.app/api/v1/sales/salesforcountincart/${stockId}`;
+    const url = `http://localhost:5000/api/v1/sales/salesforcountincart/${stockId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -129,6 +132,10 @@ const SellProductPage = () => {
     content: () => componentRef.current,
   });
   const handelPrinCart = () => {
+    if (!receiveTk) {
+      toast.warning("Please Take Receive Amount");
+      return;
+    }
     setLoading(true);
     const orderdProduct = getStoredData(lastElement);
     if (orderdProduct.length <= 0) {
@@ -160,7 +167,7 @@ const SellProductPage = () => {
     };
     setLoading(true);
 
-    fetch("https://panchahut-server.vercel.app/api/v1/stocks/stockout", {
+    fetch("http://localhost:5000/api/v1/stocks/stockout", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -177,12 +184,15 @@ const SellProductPage = () => {
           setReload(reload + 1);
           setLoading(false);
           handlePrint();
+          seReceiveTk(0);
+          if (inputRef.current) {
+            inputRef.current.focus();
+          }
         }
 
         if (data.error) {
           toast.error(data.error);
           setLoading(false);
-          // console.log(data.error);
         }
       });
   };
@@ -199,6 +209,7 @@ const SellProductPage = () => {
             ></ProductSearchSaleComp>
           </div>
         </div>
+
         {lastElement === userDetail?.pathName && (
           <div>
             {userDetail?.phone && (
@@ -226,12 +237,25 @@ const SellProductPage = () => {
       <hr className="my-2" />
       <div className="grid grid-cols-2">
         <div>
+          <div className="flex justify-start gap-6 items-center mb-4">
+            <div>
+              <ProductSearchSaleComp
+                setSearchText={setSearchText}
+                placeHolder="Search Product Id ..."
+                idName="searchProductIdForProductSerach"
+              ></ProductSearchSaleComp>
+            </div>
+            <div>
+              <BarcodeScanner
+                setReload={setReload}
+                lastElement={lastElement}
+                reload={reload}
+                inputRef={inputRef}
+              ></BarcodeScanner>
+            </div>
+          </div>
           <div>
-            <ProductSearchSaleComp
-              setSearchText={setSearchText}
-              placeHolder="Search Product Id ..."
-              idName="searchProductIdForProductSerach"
-            ></ProductSearchSaleComp>
+            <div></div>
           </div>
           {searchResult && searchText ? (
             <div>
@@ -251,92 +275,96 @@ const SellProductPage = () => {
         <div>
           <div className="" ref={componentRef}>
             <div>
-              <div className="">
-                {selectedUserCart1?.pathName === lastElement && (
-                  <SelectedUserForCart
-                    selectedUserCart={selectedUserCart1}
-                    setSelectedUserCart={setSelectedUserCart1}
-                    // handelUserAddtoCart={handelUserAddtoCart}
-                  ></SelectedUserForCart>
-                )}
-                {selectedUserCart2?.pathName === lastElement && (
-                  <SelectedUserForCart
-                    selectedUserCart={selectedUserCart2}
-                    setSelectedUserCart={setSelectedUserCart2}
-                    // handelUserAddtoCart={handelUserAddtoCart}
-                  ></SelectedUserForCart>
-                )}
-                {selectedUserCart3?.pathName === lastElement && (
-                  <SelectedUserForCart
-                    selectedUserCart={selectedUserCart3}
-                    setSelectedUserCart={setSelectedUserCart3}
-                    // handelUserAddtoCart={handelUserAddtoCart}
-                  ></SelectedUserForCart>
-                )}
+              <div>
+                <div className="">
+                  {selectedUserCart1?.pathName === lastElement && (
+                    <SelectedUserForCart
+                      selectedUserCart={selectedUserCart1}
+                      setSelectedUserCart={setSelectedUserCart1}
+                      // handelUserAddtoCart={handelUserAddtoCart}
+                    ></SelectedUserForCart>
+                  )}
+                  {selectedUserCart2?.pathName === lastElement && (
+                    <SelectedUserForCart
+                      selectedUserCart={selectedUserCart2}
+                      setSelectedUserCart={setSelectedUserCart2}
+                      // handelUserAddtoCart={handelUserAddtoCart}
+                    ></SelectedUserForCart>
+                  )}
+                  {selectedUserCart3?.pathName === lastElement && (
+                    <SelectedUserForCart
+                      selectedUserCart={selectedUserCart3}
+                      setSelectedUserCart={setSelectedUserCart3}
+                      // handelUserAddtoCart={handelUserAddtoCart}
+                    ></SelectedUserForCart>
+                  )}
+                </div>
               </div>
-              <table className="w-full table-auto text-center">
-                <thead>
-                  <tr className=" ">
-                    <th className="px-4 py-2 ">Id</th>
-                    <th className="px-4 py-2 text-left">Name</th>
-                    <th className="px-4 py-2">Price</th>
-                    <th className="px-4 py-2">Quantity</th>
-                    <th className="px-4 py-2">Total</th>
-                    <th className="px-4 py-2"></th>
-                  </tr>
-                </thead>
-                {addToCart.length > 0 && (
-                  <tbody>
-                    {addToCart?.map((product, index) => (
-                      <tr
-                        key={index}
-                        className={index % 2 === 0 ? "bg-gray-200" : ""}
-                      >
-                        <td className="px-4 py-2 text-left">
-                          {product?.productId}
-                        </td>
-                        <td className="px-4 py-2 text-left">
-                          {product?.productName}
-                        </td>
-
-                        <td className="px-4 py-2 text-blue-700 font-semibold">
-                          {product?.regularPrice} Tk
-                        </td>
-                        <td className=" text-orange-700 ">
-                          <div className="flex items-center gap-4 justify-center">
-                            <CiSquarePlus
-                              onClick={() =>
-                                handelCountQuentity(product?.stockId, true)
-                              }
-                              className="text-4xl text-gray-500 cursor-pointer hover:text-gray-700"
-                            />
-
-                            <span className="font-bold">
-                              {product.orderQuentity}
-                            </span>
-                            <CiSquareMinus
-                              onClick={() =>
-                                handelCountQuentity(product?.stockId, false)
-                              }
-                              className="text-4xl text-gray-500 cursor-pointer  hover:text-gray-700"
-                            />
-                          </div>
-                        </td>
-
-                        <td className="md:px-4 py-2">
-                          {product?.regularPrice * product.orderQuentity}
-                        </td>
-                        <td
-                          className="md:px-4 py-2 cursor-pointer  hover:text-red-700"
-                          onClick={() => handelRemoveCart(product.stockId)}
+              <div>
+                <table className="w-full table-auto text-center">
+                  <thead>
+                    <tr className=" ">
+                      <th className="px-4 py-2 ">Id</th>
+                      <th className="px-4 py-2 text-left">Name</th>
+                      <th className="px-4 py-2">Price</th>
+                      <th className="px-4 py-2">Quantity</th>
+                      <th className="px-4 py-2">Total</th>
+                      <th className="px-4 py-2"></th>
+                    </tr>
+                  </thead>
+                  {addToCart.length > 0 && (
+                    <tbody>
+                      {addToCart?.map((product, index) => (
+                        <tr
+                          key={index}
+                          className={index % 2 === 0 ? "bg-gray-200" : ""}
                         >
-                          <RxCross1 />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                )}
-              </table>
+                          <td className="px-4 py-2 text-left">
+                            {product?.productId}
+                          </td>
+                          <td className="px-4 py-2 text-left">
+                            {product?.productName}
+                          </td>
+
+                          <td className="px-4 py-2 text-blue-700 font-semibold">
+                            {product?.regularPrice} Tk
+                          </td>
+                          <td className=" text-orange-700 ">
+                            <div className="flex items-center gap-4 justify-center">
+                              <CiSquarePlus
+                                onClick={() =>
+                                  handelCountQuentity(product?.stockId, true)
+                                }
+                                className="text-4xl text-gray-500 cursor-pointer hover:text-gray-700"
+                              />
+
+                              <span className="font-bold">
+                                {product.orderQuentity}
+                              </span>
+                              <CiSquareMinus
+                                onClick={() =>
+                                  handelCountQuentity(product?.stockId, false)
+                                }
+                                className="text-4xl text-gray-500 cursor-pointer  hover:text-gray-700"
+                              />
+                            </div>
+                          </td>
+
+                          <td className="md:px-4 py-2">
+                            {product?.regularPrice * product.orderQuentity}
+                          </td>
+                          <td
+                            className="md:px-4 py-2 cursor-pointer  hover:text-red-700"
+                            onClick={() => handelRemoveCart(product.stockId)}
+                          >
+                            <RxCross1 />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  )}
+                </table>
+              </div>
               <br />
               <hr />
               <div className="mx-6 ">
@@ -378,6 +406,27 @@ const SellProductPage = () => {
                   Total Amount:
                   <span className="mx-2 font-bold text-orange-600">
                     {totalPriceAll() - less}
+                  </span>
+                  Tk
+                </p>
+              </div>
+              <div className=" flex justify-between">
+                <p>Receive Amount </p>
+                <div className="text-right">
+                  <input
+                    className="w-full  text-right border border-gray-600 "
+                    type="number"
+                    min="0"
+                    value={receiveTk}
+                    onChange={(e) => seReceiveTk(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="mx-6 ">
+                <p className="text-right">
+                  Return Amount:
+                  <span className="mx-2 ">
+                    {receiveTk - totalPriceAll() - less}
                   </span>
                   Tk
                 </p>
