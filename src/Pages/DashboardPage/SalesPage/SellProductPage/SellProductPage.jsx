@@ -22,6 +22,7 @@ const SellProductPage = () => {
   const [selectedUserCart2, setSelectedUserCart2] = useState({});
   const [selectedUserCart3, setSelectedUserCart3] = useState({});
   const [less, setLess] = useState(0);
+  // const [getMoney, setLess] = useState(0);
   const [discountBox, setDiscountBox] = useState(false);
   const [searchText, setSearchText] = useState(0);
   const [searchResult, setSearchResult] = useState([]);

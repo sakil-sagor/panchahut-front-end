@@ -4,7 +4,8 @@ import Loading from "../../../../Components/Shared/Loading/Loading";
 import useProducts from "../../../../hooks/useProducts";
 
 const AllProducts = () => {
-  const { allProducts, loading } = useProducts();
+  const { allProducts, loading, setSearchText, total, count, page, setPage } =
+    useProducts();
 
   return (
     <div className="min-h-[80vh] bg-blue-50 ">
@@ -20,13 +21,15 @@ const AllProducts = () => {
               </h2>
               <div className="flex items-center justify-between mt-4 px-2">
                 <p>
-                  Total Result:{allProducts?.result?.length} <span>{""}</span>
+                  Total Result:{total} <span>{""}</span>
                 </p>
                 <div>
                   <label htmlFor="">Search </label>
                   <input
+                    placeholder="Write Product Name . . ."
                     className="border border-gray-400 p-1 bg-blue-50 rounded"
                     type="text"
+                    onChange={(e) => setSearchText(e.target.value)}
                   />
                 </div>
               </div>
@@ -40,16 +43,15 @@ const AllProducts = () => {
               <table className="w-full table-auto">
                 <thead>
                   <tr className="text-left">
+                    <th className="px-4 py-2"></th>
                     <th className="px-4 py-2">ID</th>
                     <th className="px-4 py-2">Name</th>
-                    <th className="px-4 py-2">Quantity</th>
-                    <th className="px-4 py-2">Costing Price</th>
-                    <th className="px-4 py-2"> Discount</th>
-                    <th className="px-4 py-2">Selling Price</th>
-                    <th className="px-4 py-2">View Product</th>
-                    <th className="px-4 py-2">Add Stock</th>
+                    <th className="px-4 py-2">Weight</th>
 
-                    <th className="px-4 py-2">Barcode</th>
+                    <th className="px-4 py-2"></th>
+                    <th className="px-4 py-2"></th>
+
+                    <th className="px-4 py-2"></th>
                   </tr>
                 </thead>
 
@@ -65,6 +67,31 @@ const AllProducts = () => {
               </table>
             )}
           </div>
+        </div>
+        <div className=" ">
+          {total ? (
+            <>
+              <hr className="border-2 border-t-white mt-16" />
+              <div className=" mb-16  flex items-center mt-8">
+                <p className="text-sky-800 font-semibold mr-3">Total Page :</p>
+                <div>
+                  {[...Array(count).keys()].map((number) => (
+                    <button
+                      className={`${
+                        page === number ? "bg-sky-700 " : " bg-gray-500"
+                      } text-white rounded  mr-4 py-1 px-4`}
+                      key={number}
+                      onClick={() => setPage(number)}
+                    >
+                      {number + 1}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
     </div>

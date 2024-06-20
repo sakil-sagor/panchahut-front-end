@@ -118,14 +118,14 @@ const CreateProduct = () => {
   );
 
   return (
-    <div className="bg-sky-50 min-h-screen">
+    <div className="min-h-screen">
       <div className="   pb-24 ">
         <div className="  ">
-          <div className="bg-sky-50 ">
+          <div className=" ">
             <div className=" ">
               <div className=" m-4 ">
                 <form
-                  className=" border shadow-xl shadow-sky-300 p-2  rounded-md"
+                  className=" border shadow-xl  p-2  rounded-md"
                   onSubmit={handleSubmit}
                 >
                   <div className="flex  items-center justify-between ">
@@ -134,13 +134,15 @@ const CreateProduct = () => {
                         className=" text-gray-600 font-semibold  "
                         htmlFor="productName"
                       >
-                        Product Name
+                        Product Name{" "}
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <input
                         className="py-1 w-full  px-2 rounded-md border border-gray-300"
                         type="text"
                         name="productName"
                         placeholder="Prodcut name "
+                        required
                         value={formData.productName}
                         onChange={handleInputChange}
                       />
@@ -169,9 +171,11 @@ const CreateProduct = () => {
                         htmlFor="image"
                       >
                         Image
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <input
                         id="image"
+                        required
                         className="py-1 rounded-md"
                         type="file"
                         accept="image/*"
@@ -205,7 +209,7 @@ const CreateProduct = () => {
                         Category
                       </label>
                       <select
-                        className="py-2 px-4  text-lg  required rounded-md "
+                        className="py-2 px-4  text-lg   rounded-md "
                         name="categoryId"
                         value={formData.category}
                         onChange={(e) => setGetCategory(e.target.value)}
@@ -228,7 +232,7 @@ const CreateProduct = () => {
                         Sub-Category
                       </label>
                       <select
-                        className="py-2 px-4  text-lg  required rounded-md "
+                        className="py-2 px-4  text-lg   rounded-md "
                         name="subcategory"
                         placeholder="Sub-Category"
                         value={formData.subcategory}
@@ -252,11 +256,13 @@ const CreateProduct = () => {
                         htmlFor="weight"
                       >
                         Weight
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <input
                         className="py-1 block  px-2 rounded-md border border-gray-300"
                         type="number"
                         min="0"
+                        required
                         name="weight"
                         placeholder="Weight"
                         value={formData.weight}
@@ -269,6 +275,7 @@ const CreateProduct = () => {
                         htmlFor="weightUnit"
                       >
                         Weight Unit
+                        <span className="text-red-700 font-bold"> *</span>
                       </label>
                       <select
                         name="weightUnit"
@@ -298,7 +305,6 @@ const CreateProduct = () => {
                       Description
                     </label>
                     <textarea
-                      required
                       className="py-1 rounded-md  px-2  border border-gray-300"
                       name="description"
                       id="description"
@@ -310,22 +316,19 @@ const CreateProduct = () => {
                     ></textarea>
                   </div>
                   <div className=" mt-4 ">
-                    <div className="flex items-center justify-center h-10  bg-sky-800 rounded">
-                      <button className=" ">
-                        <img
-                          className={`w-8 text-center  mx-auto ${
-                            !loading && "hidden"
-                          }`}
-                          src={blue}
-                          alt=""
-                        />
-                      </button>
+                    <div className="  ">
                       <button
-                        className={`w-full h-full  text-white py-18 ${
-                          loading && "hidden"
-                        }`}
+                        className={`flex justify-center items-center mx-auto w-36 h-8 text-white px-4 py-1 bg-sky-700 hover:bg-sky-900 duration-200 rounded `}
                       >
-                        <span>Add Product</span>
+                        {loading ? (
+                          <img
+                            className={`w-8 h-8 text-center  mx-auto `}
+                            src={blue}
+                            alt=""
+                          />
+                        ) : (
+                          <span>Create Product</span>
+                        )}
                       </button>
                     </div>
                   </div>

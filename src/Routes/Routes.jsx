@@ -8,7 +8,7 @@ import AllProducts from "../Pages/DashboardPage/ProductsPage/AllProducts/AllProd
 import ProductsPage from "../Pages/DashboardPage/ProductsPage/ProductsPage";
 import SalesPage from "../Pages/DashboardPage/SalesPage/SalesPage";
 import SellProductPage from "../Pages/DashboardPage/SalesPage/SellProductPage/SellProductPage";
-import AddStocks from "../Pages/DashboardPage/StocksPage/AddStocks/AddStocks";
+import AllStocksPage from "../Pages/DashboardPage/StocksPage/AllStocksPage/AllStocksPage";
 import StockInPage from "../Pages/DashboardPage/StocksPage/StockInPage/StockInPage";
 import StockOutPage from "../Pages/DashboardPage/StocksPage/StockOutPage/StockOutPage";
 import StocksPage from "../Pages/DashboardPage/StocksPage/StocksPage";
@@ -35,18 +35,12 @@ const router = createBrowserRouter([
         path: "/aboutUs",
         element: <HomePage />,
       },
-      // {
-      //   path: "/shop",
-      //   element: <ShopPage />,
-      // },
+
       {
         path: "login",
         element: <Registration></Registration>,
       },
-      // {
-      //   path: "/createProduct",
-      //   element: <CreateProduct />,
-      // },
+
       {
         path: "/dashboard",
         element: (
@@ -108,8 +102,8 @@ const router = createBrowserRouter([
                 element: <TotalStockPage></TotalStockPage>,
               },
               {
-                path: "/dashboard/stocks/addstocks",
-                element: <AddStocks></AddStocks>,
+                path: "/dashboard/stocks/allstocks",
+                element: <AllStocksPage></AllStocksPage>,
               },
               {
                 path: "/dashboard/stocks/stocksin",

@@ -1,10 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import Barcode from "../../Shared/Barcode/Barcode";
 
-const PrintBarCode = ({ product }) => {
-  const [generateNumber, setGenerateNumber] = useState();
-  const [cards, setCards] = useState([]);
+const PrintBarCode = ({ product, i }) => {
   const componentRef = useRef();
   const {
     _id,
@@ -16,43 +14,29 @@ const PrintBarCode = ({ product }) => {
     quantity,
     regularPrice,
   } = product;
-
-  const handelSubmitGenerate = (e) => {
-    e.preventDefault();
-
-    const newCards = Array(5)
-      .fill(null)
-      .map((_, index) => (
-        <Barcode
-          stockId={stockId}
-          productIdNumber={productIdNumber}
-          regularPrice={regularPrice}
-          key={index}
-        />
-      ));
-
-    setCards(newCards);
-  };
+  console.log(product);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
   return (
-    <dialog id={`my_modal_${_id}`} className="modal  fixed">
+    <dialog id={`my_modal_Bar${stockId}`} className="modal  fixed">
       <div className="modal-box w-11/12 max-w-5xl ">
         <div className="flex justify-end">
           <form method="dialog">
             <button className="btn font-bold text-2xl text-red-600">X</button>
           </form>
         </div>
+
         <div>
-          <div className="grid grid-cols-3">
-            <div ref={componentRef}>
+          <div className="grid grid-cols-8 gap-x-6 mt-10" ref={componentRef}>
+            {Array.from({ length: quantity }).map((_, index) => (
               <Barcode
                 stockId={stockId}
                 productIdNumber={productIdNumber}
                 regularPrice={regularPrice}
+                discount={discount}
               />
-            </div>
+            ))}
           </div>
         </div>
         <div className="flex justify-end ml-20">
@@ -62,9 +46,6 @@ const PrintBarCode = ({ product }) => {
           >
             print
           </button>
-        </div>
-        <div>
-          <div className="grid grid-cols-2  gap-40">{cards}</div>
         </div>
       </div>
     </dialog>

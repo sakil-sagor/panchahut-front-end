@@ -14,7 +14,7 @@ const SideNavbar = () => {
   };
 
   return (
-    <div className="">
+    <div className="  ">
       <div className=" px-2  mx-auto md:min-h-screen text-sm">
         <div className="rawer-content menu text-black font-semibold">
           <div className="mb-6">
