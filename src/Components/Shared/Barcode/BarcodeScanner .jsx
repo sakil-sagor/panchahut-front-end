@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { axiosSecure } from "../../../hooks/useAxios";
 import { getStoredData } from "../../../utils/localStorage";
 
-const BarcodeScanner = ({ lastElement, reload, setReload }) => {
+const BarcodeScanner = ({ lastElement, reload, setReload, inputRef }) => {
   const [barcode, setBarcode] = useState("");
 
   const handleScan = (event) => {
@@ -55,6 +55,7 @@ const BarcodeScanner = ({ lastElement, reload, setReload }) => {
         type="text"
         value={barcode}
         onChange={handleScan}
+        ref={inputRef}
         placeholder="Scan barcode here"
       />
     </div>

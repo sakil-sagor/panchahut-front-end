@@ -22,7 +22,7 @@ const SellProductPage = () => {
   const [selectedUserCart2, setSelectedUserCart2] = useState({});
   const [selectedUserCart3, setSelectedUserCart3] = useState({});
   const [less, setLess] = useState(0);
-  // const [getMoney, setLess] = useState(0);
+  const [receiveTk, seReceiveTk] = useState(0);
   const [discountBox, setDiscountBox] = useState(false);
   const [searchText, setSearchText] = useState(0);
   const [searchResult, setSearchResult] = useState([]);
@@ -34,6 +34,7 @@ const SellProductPage = () => {
   const { buttonRefCtrlEnter, buttonRefPlus } = useButtonPrintP();
   const [loading, setLoading] = useState(false);
   const componentRef = useRef();
+  const inputRef = useRef(null);
 
   // get the search product
   useEffect(() => {
@@ -131,6 +132,10 @@ const SellProductPage = () => {
     content: () => componentRef.current,
   });
   const handelPrinCart = () => {
+    if (!receiveTk) {
+      toast.warning("Please Take Receive Amount");
+      return;
+    }
     setLoading(true);
     const orderdProduct = getStoredData(lastElement);
     if (orderdProduct.length <= 0) {
@@ -179,6 +184,10 @@ const SellProductPage = () => {
           setReload(reload + 1);
           setLoading(false);
           handlePrint();
+          seReceiveTk(0);
+          if (inputRef.current) {
+            inputRef.current.focus();
+          }
         }
 
         if (data.error) {
@@ -241,6 +250,7 @@ const SellProductPage = () => {
                 setReload={setReload}
                 lastElement={lastElement}
                 reload={reload}
+                inputRef={inputRef}
               ></BarcodeScanner>
             </div>
           </div>
@@ -396,6 +406,27 @@ const SellProductPage = () => {
                   Total Amount:
                   <span className="mx-2 font-bold text-orange-600">
                     {totalPriceAll() - less}
+                  </span>
+                  Tk
+                </p>
+              </div>
+              <div className=" flex justify-between">
+                <p>Receive Amount </p>
+                <div className="text-right">
+                  <input
+                    className="w-full  text-right border border-gray-600 "
+                    type="number"
+                    min="0"
+                    value={receiveTk}
+                    onChange={(e) => seReceiveTk(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="mx-6 ">
+                <p className="text-right">
+                  Return Amount:
+                  <span className="mx-2 ">
+                    {receiveTk - totalPriceAll() - less}
                   </span>
                   Tk
                 </p>

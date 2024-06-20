@@ -28,7 +28,7 @@ const SearchProductSaleComp = ({
   const handeladdToCart = (product) => {
     const cartData = {
       productId: product?.productIdNumber,
-      stockId: product?._id,
+      stockId: product?.stockId,
       productName: product?.product?.productName,
       weight: product?.product?.weight,
       weightUnit: product?.product?.weightUnit,
