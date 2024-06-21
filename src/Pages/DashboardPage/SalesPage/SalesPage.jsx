@@ -7,8 +7,6 @@ const SalesPage = () => {
     { id: 1, path: "/dashboard/sales/customer1", name: "customer1" },
     { id: 2, path: "/dashboard/sales/customer2", name: "customer2" },
     { id: 3, path: "/dashboard/sales/customer3", name: "customer3" },
-    // { id: 4, path: "/dashboard/sales/customer4", name: "customer4" },
-    // { id: 5, path: "/dashboard/sales/customer5", name: "customer5" },
   ];
   return (
     <div>

@@ -35,11 +35,11 @@ const SellProductPage = () => {
   const [loading, setLoading] = useState(false);
   const componentRef = useRef();
   const inputRef = useRef(null);
-  console.log(addToCart);
+
   // get the search product
   useEffect(() => {
     if (searchText) {
-      const url = `https://panchahut-server.vercel.app/api/v1/sales/${searchText}`;
+      const url = `http://localhost:5000/api/v1/sales/${searchText}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -59,10 +59,11 @@ const SellProductPage = () => {
     // get the product from database
 
     let newResult;
-    const url = `https://panchahut-server.vercel.app/api/v1/sales/salesforcountincart/${stockId}`;
+    const url = `http://localhost:5000/api/v1/sales/salesforcountincart/${stockId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
+
       newResult = data?.data;
     } catch (error) {
       console.error("Error fetching product data:", error);
@@ -75,8 +76,8 @@ const SellProductPage = () => {
           toast.error("Stock is empty,Can not add more.");
         } else {
           let newValue = boolean
-            ? product.orderQuentity + 1
-            : product.orderQuentity - 1;
+            ? product?.orderQuentity + 1
+            : product?.orderQuentity - 1;
 
           return { ...product, orderQuentity: Math.max(1, newValue) };
         }
@@ -167,7 +168,7 @@ const SellProductPage = () => {
     };
     setLoading(true);
 
-    fetch("https://panchahut-server.vercel.app/api/v1/stocks/stockout", {
+    fetch("http://localhost:5000/api/v1/stocks/stockout", {
       method: "POST",
       headers: {
         "content-type": "application/json",

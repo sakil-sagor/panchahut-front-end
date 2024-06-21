@@ -78,7 +78,7 @@ const CreateProduct = () => {
       productImage: imageUrl,
     };
 
-    fetch("https://panchahut-server.vercel.app/api/v1/product/create", {
+    fetch("http://localhost:5000/api/v1/product/create", {
       method: "POST",
       headers: {
         "content-type": "application/json",

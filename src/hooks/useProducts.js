@@ -17,11 +17,11 @@ const useProducts = () => {
     console.log(searchText);
 
     if (searchText) {
-      url = `https://panchahut-server.vercel.app/api/v1/product/all?search=${searchText}&page=${
+      url = `http://localhost:5000/api/v1/product/all?search=${searchText}&page=${
         page + 1
       }&limit=${limit}`;
     } else {
-      url = `https://panchahut-server.vercel.app/api/v1/product/all?page=${
+      url = `http://localhost:5000/api/v1/product/all?page=${
         page + 1
       }&limit=${limit}`;
     }

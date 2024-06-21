@@ -5,7 +5,7 @@ import StockDetails from "../StocksComponents/StockDetails";
 import ProductsDetail from "./ProductsDetail";
 import UpdateProduct from "./UpdateProduct";
 
-const     SingleProduct = ({ product, index }) => {
+const SingleProduct = ({ product, index }) => {
   const {
     _id,
     productId,
@@ -17,7 +17,7 @@ const     SingleProduct = ({ product, index }) => {
   } = product;
   const [reload, setReload] = useState(0);
   return (
-    <tr key={productId} className={index % 2 === 0 ? "bg-[#f2f2f2]" : ""}>
+    <tr key={productId} className={index % 2 === 0 ? "bg-[#dcdbdb]" : ""}>
       <td className="px-4 py-2">
         <img className="w-10" src={productImage} alt="" />
       </td>
