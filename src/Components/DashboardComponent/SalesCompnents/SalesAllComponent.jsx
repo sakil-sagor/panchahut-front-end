@@ -9,7 +9,7 @@ const SalesAllComponent = () => {
 
   useEffect(() => {
     setLoading(true);
-    const url = `http://localhost:5000/api/v1/product/${searchText}`;
+    const url = `https://panchahut-server.vercel.app/api/v1/product/${searchText}`;
 
     fetch(url)
       .then((res) => res.json())

@@ -70,7 +70,7 @@ const UpdateProduct = ({ product }) => {
       productImage: imageUrl,
     };
 
-    fetch("http://localhost:5000/api/v1/product/update", {
+    fetch("https://panchahut-server.vercel.app/api/v1/product/update", {
       method: "POST",
       headers: {
         "content-type": "application/json",

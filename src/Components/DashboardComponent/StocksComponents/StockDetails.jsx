@@ -11,7 +11,7 @@ const StockDetails = ({ product, reload, setReload }) => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:5000/api/v1/stocks/singlestock/${product?.productId}`
+          `https://panchahut-server.vercel.app/api/v1/stocks/singlestock/${product?.productId}`
         );
         const data = await response.json();
 
@@ -39,7 +39,7 @@ const StockDetails = ({ product, reload, setReload }) => {
       toast.error("Invalid stock ID");
       return;
     }
-    const url = `http://localhost:5000/api/v1/stocks/singlestock/${id}`;
+    const url = `https://panchahut-server.vercel.app/api/v1/stocks/singlestock/${id}`;
     try {
       const response = await fetch(url, {
         method: "DELETE",
