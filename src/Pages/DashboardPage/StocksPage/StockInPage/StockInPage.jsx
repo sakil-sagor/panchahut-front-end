@@ -362,7 +362,7 @@
 //     const fetchData = async () => {
 //       setLoading(true);
 //       try {
-//         let url = `http://localhost:5000/api/v1/stocks/stocks-in?page=${page}&limit=${limit}`;
+//         let url = `https://panchahut-server.vercel.app/api/v1/stocks/stocks-in?page=${page}&limit=${limit}`;
 //         if (timePeriod !== "all") {
 //           const now = new Date();
 //           let startDate;

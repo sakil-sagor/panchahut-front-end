@@ -29,7 +29,7 @@ const AddNewUserSales = ({ setUserDetail }) => {
       return;
     }
 
-    fetch(" http://localhost:5000/api/v1/user/createuser", {
+    fetch(" https://panchahut-server.vercel.app/api/v1/user/createuser", {
       method: "POST",
       headers: {
         "content-type": "application/json",
