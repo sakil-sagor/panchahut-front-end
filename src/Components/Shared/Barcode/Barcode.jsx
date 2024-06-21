@@ -1,33 +1,38 @@
 import JsBarcode from "jsbarcode";
 import React, { useEffect, useRef, useState } from "react";
 
-const Barcode = ({ stockId, productIdNumber, regularPrice }) => {
+const Barcode = ({ product }) => {
   const barcodeRef = useRef(null);
   const [totalBarcode, setTotalBarcode] = useState([]);
 
   useEffect(() => {
     if (barcodeRef.current) {
-      JsBarcode(barcodeRef.current, stockId, {
+      JsBarcode(barcodeRef.current, product?.stockId, {
         format: "CODE128",
         displayValue: true,
         fontOptions: "bold",
         textMargin: 0,
-        fontSize: 16,
-        width: 2, // smaller bar width
-        height: 40, // smaller bar height
+        fontSize: 18,
+        width: 3, // smaller bar width
+        height: 48, // smaller bar height
       });
     }
-  }, [stockId]);
+  }, [product?.stockId]);
 
   return (
     <div className="">
-      <p className="flex justify-center m-[-15px] text-sm   ">
-        Price: {regularPrice} Tk
+      <p className="flex justify-center font-bold text-[10px] mb-[-5px]">
+        PANCHAHUT
       </p>
-
-      <div className="flex justify-center m-0">
-        <svg className="" ref={barcodeRef}></svg>
+      <p className="flex justify-center text-[10px] mb-[-5px]">
+        {product?.productName}
+      </p>
+      <div className="flex justify-center m-0 p-0">
+        <svg className="m-0 p-0 h-[48px]" ref={barcodeRef}></svg>
       </div>
+      <p className="flex justify-center mt-[-8px] font-bold  ">
+        Price: {product?.regularPrice} Tk
+      </p>
     </div>
   );
 };

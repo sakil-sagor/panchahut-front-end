@@ -39,7 +39,9 @@ const ProductsDetail = ({ product, index }) => {
           <div className="pb-8 col-span-12  md:col-span-9 lg:col-span-10 ">
             <div className="grid grid-cols-1 md:grid-cols-2 my-2 ">
               <div className="flex items-center">
-                <span>{`${productName}  ${productNameBangla}` || "N/A"}</span>
+                <span>
+                  {`${productName} ( ${productNameBangla} )` || "N/A"}
+                </span>
               </div>
 
               <hr className="md:hidden my-2" />
@@ -63,41 +65,9 @@ const ProductsDetail = ({ product, index }) => {
             <hr />
             <div className="grid grid-cols-1 md:grid-cols-2 my-2 ">
               <div className="flex items-center">
-                <span className="w-24">adminName</span>
-                <span>: {adminName || "N/A"}</span>
-              </div>
-              <hr className="md:hidden my-2" />
-              <div className="flex items-center">
                 <span className="w-24">featured</span>
-                <span>: {featured || "N/A"}</span>
+                <span>: {featured ? "Feature" : "N/A"}</span>
               </div>
-            </div>
-            <hr />
-            <div className="grid grid-cols-1 md:grid-cols-2 my-2 ">
-              <div className="flex items-center">
-                <span className="w-24">costingPrice</span>
-                <span>: {costingPrice || "N/A"} Tk</span>
-              </div>
-              <hr className="md:hidden my-2" />
-              <div className="flex items-center">
-                <span className="w-24">RegularPrice</span>
-                <span>: {regularPrice || "N/A"} Tk</span>
-              </div>
-            </div>
-            <hr />
-            <div className="grid grid-cols-1 md:grid-cols-2 my-2 ">
-              <div className="flex items-center">
-                <span className="w-24">Discount </span>
-                <span>: {discount || "N/A"} Tk</span>
-              </div>
-              <hr className="md:hidden my-2" />
-              <div className="flex items-center">
-                <span className="w-24">Discount Price</span>
-                <span>: {regularPrice - discount || "N/A"}</span>
-              </div>
-            </div>
-            <hr />
-            <div className="grid grid-cols-1 md:grid-cols-2 my-2 ">
               <div className="flex items-center">
                 <span className="w-24">weight</span>
                 <span>
@@ -105,10 +75,6 @@ const ProductsDetail = ({ product, index }) => {
                 </span>
               </div>
               <hr className="md:hidden my-2" />
-              <div className="flex items-center">
-                <span className="w-24">quantity</span>
-                <span>: {quantity || "N/A"}</span>
-              </div>
             </div>
             <hr />
             <div className="my-2 ">

@@ -28,14 +28,9 @@ const PrintBarCode = ({ product, i }) => {
         </div>
 
         <div>
-          <div className="grid grid-cols-8 gap-x-6 mt-10" ref={componentRef}>
+          <div className="grid grid-cols-7 gap-y-4 mt-10" ref={componentRef}>
             {Array.from({ length: quantity }).map((_, index) => (
-              <Barcode
-                stockId={stockId}
-                productIdNumber={productIdNumber}
-                regularPrice={regularPrice}
-                discount={discount}
-              />
+              <Barcode product={product} />
             ))}
           </div>
         </div>

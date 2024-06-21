@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import AddStocks from "../StocksComponents/AddStocks";
 import StockDetails from "../StocksComponents/StockDetails";
 import ProductsDetail from "./ProductsDetail";
+import UpdateProduct from "./UpdateProduct";
 
 const SingleProduct = ({ product, index }) => {
   const {
@@ -64,6 +65,21 @@ const SingleProduct = ({ product, index }) => {
           setReload={setReload}
           reload={reload}
         ></AddStocks>
+      </td>
+      <td className="md:px-4 py-2">
+        <div
+          onClick={() =>
+            document.getElementById(`my_modal_up${_id}`).showModal()
+          }
+          className="cursor-pointer text-center bg-green-700 text-white px-4 py-1 rounded hover:bg-green-800 text-sm"
+        >
+          Update
+        </div>
+        <UpdateProduct
+          product={product}
+          setReload={setReload}
+          reload={reload}
+        ></UpdateProduct>
       </td>
     </tr>
   );
