@@ -9,7 +9,7 @@ const useProducts = () => {
   const [count, setCount] = useState(0);
   const [total, setTotal] = useState(0);
   const [searchText, setSearchText] = useState("");
-  const limit = 2;
+  const limit = 20;
 
   useEffect(() => {
     let url;
