@@ -90,13 +90,13 @@ const CreateProduct = () => {
         if (data.status === "success") {
           toast.success("success");
           setFormData({
-            productName: "",
-            productNameBangla: "",
-            description: "",
-            productImage: "",
-            brandName: "",
-            category: "",
-            subcategory: "",
+            // productName: "",
+            // productNameBangla: "",
+            // description: "",
+            // productImage: "",
+            // brandName: "",
+            // category: "",
+            // subcategory: "",
             weight: "",
             weightUnit: "",
           });

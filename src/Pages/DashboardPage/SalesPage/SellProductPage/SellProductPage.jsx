@@ -35,7 +35,7 @@ const SellProductPage = () => {
   const [loading, setLoading] = useState(false);
   const componentRef = useRef();
   const inputRef = useRef(null);
-
+  console.log(addToCart);
   // get the search product
   useEffect(() => {
     if (searchText) {
@@ -320,7 +320,7 @@ const SellProductPage = () => {
                           className={index % 2 === 0 ? "bg-gray-200" : ""}
                         >
                           <td className="px-4 py-2 text-left">
-                            {product?.productId}
+                            {product?.stockId}
                           </td>
                           <td className="px-4 py-2 text-left">
                             {product?.productName}

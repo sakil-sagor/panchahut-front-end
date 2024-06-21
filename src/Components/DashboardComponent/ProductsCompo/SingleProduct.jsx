@@ -5,7 +5,7 @@ import StockDetails from "../StocksComponents/StockDetails";
 import ProductsDetail from "./ProductsDetail";
 import UpdateProduct from "./UpdateProduct";
 
-const SingleProduct = ({ product, index }) => {
+const     SingleProduct = ({ product, index }) => {
   const {
     _id,
     productId,

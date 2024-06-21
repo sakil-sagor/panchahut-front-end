@@ -18,10 +18,10 @@ const BarcodeScanner = ({ lastElement, reload, setReload, inputRef }) => {
 
       const cartData = {
         productId: product?.productIdNumber,
-        stockId: product?._id,
-        productName: product?.product?.productName,
-        weight: product?.product?.weight,
-        weightUnit: product?.product?.weightUnit,
+        stockId: product?.stockId,
+        productName: product?.productName,
+        weight: product?.weight,
+        weightUnit: product?.weightUnit,
         regularPrice: product?.regularPrice,
         discount: product?.discount,
         orderQuentity: 1,

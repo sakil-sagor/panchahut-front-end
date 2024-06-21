@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import Barcode from "../../Shared/Barcode/Barcode";
 
-const PrintBarCode = ({ product, i }) => {
+const PrintBarCode = ({ product, i, weight, weightUnit }) => {
   const componentRef = useRef();
   const {
     _id,
@@ -28,9 +28,16 @@ const PrintBarCode = ({ product, i }) => {
         </div>
 
         <div>
-          <div className="grid grid-cols-7 gap-y-4 mt-10" ref={componentRef}>
+          <div
+            className="grid grid-cols-6 gap-y-4 mt-10 px-3"
+            ref={componentRef}
+          >
             {Array.from({ length: quantity }).map((_, index) => (
-              <Barcode product={product} />
+              <Barcode
+                product={product}
+                weight={weight}
+                weightUnit={weightUnit}
+              />
             ))}
           </div>
         </div>

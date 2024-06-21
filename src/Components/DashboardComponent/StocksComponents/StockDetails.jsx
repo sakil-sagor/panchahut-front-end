@@ -34,7 +34,6 @@ const StockDetails = ({ product, reload, setReload }) => {
     if (!userConfirmed) {
       return;
     }
-
     if (!id) {
       toast.error("Invalid stock ID");
       return;
@@ -62,7 +61,7 @@ const StockDetails = ({ product, reload, setReload }) => {
       setReload((prevReload) => prevReload + 1);
     }
   };
-
+  console.log(singleStock);
   return (
     <dialog id={`my_modal_${product?.productId}`} className="modal  fixed">
       <div className="modal-box w-11/12 max-w-5xl ">
@@ -71,6 +70,7 @@ const StockDetails = ({ product, reload, setReload }) => {
             <button className="btn font-bold text-2xl text-red-600">X</button>
           </form>
         </div>
+
         <div>
           {singleStock.length < 1 ? (
             <div>
@@ -79,68 +79,79 @@ const StockDetails = ({ product, reload, setReload }) => {
               </p>
             </div>
           ) : (
-            <table className="w-full table-auto">
-              <thead>
-                <tr className="text-left">
-                  <th className="px-4 py-2">Stock Id</th>
-                  <th className="px-4 py-2">Name</th>
-                  <th className="px-4 py-2">Weight</th>
+            <div>
+              <p className="text-center font-bold text-2xl text-sky-700 mb-4">
+                {product?.productName} {product?.weight}
+                {product?.weightUnit}
+              </p>
 
-                  <th className="px-4 py-2">Costing Price</th>
-                  <th className="px-4 py-2">Selling Price</th>
-                  <th className="px-4 py-2">Quentity</th>
+              <table className="w-full table-auto">
+                <thead>
+                  <tr className="text-left">
+                    <th className="px-4 py-2">Stock Id</th>
+                    <th className="px-4 py-2">Name</th>
+                    <th className="px-4 py-2">Weight</th>
 
-                  <th className="px-4 py-2">Discount</th>
-                </tr>
-              </thead>
+                    <th className="px-4 py-2">Costing Price</th>
+                    <th className="px-4 py-2">Selling Price</th>
+                    <th className="px-4 py-2">Quentity</th>
 
-              <tbody>
-                {singleStock?.map((stock, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-[#f2f2f2]" : ""}>
-                    <td className="px-4 py-2">{stock?.stockId}</td>
-                    <td className="px-4 py-2 text-blue-700 font-semibold">
-                      {stock?.productName}
-                    </td>
-                    <td className="px-4 py-2 text-blue-700 font-semibold">
-                      {product?.weight} {product?.weightUnit}
-                    </td>
-
-                    <td className="px-4 py-2 text-blue-700 font-semibold">
-                      {stock?.costingPrice}
-                    </td>
-                    <td className="px-4 py-2 text-blue-700 font-semibold">
-                      {stock?.regularPrice}
-                    </td>
-                    <td className="md:px-4 py-2">{stock?.quantity}</td>
-                    <td className="md:px-4 py-2">{stock?.discount}</td>
-
-                    <td className="md:px-4 py-2">
-                      <div
-                        onClick={() =>
-                          document
-                            .getElementById(`my_modal_Bar${stock?.stockId}`)
-                            .showModal()
-                        }
-                        className="cursor-pointer flex gap-1 justify-between bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 text-sm"
-                      >
-                        <div>
-                          <span>Barcode</span>
-                        </div>
-                      </div>
-                      <PrintBarCode product={stock}></PrintBarCode>
-                    </td>
-                    <td>
-                      <div
-                        onClick={() => handelDeleteStock(stock?.stockId)}
-                        className="md:px-4 py-2 cursor-pointer flex gap-1 justify-between bg-red-700 text-white  rounded hover:bg-red-800 text-sm"
-                      >
-                        Delete
-                      </div>
-                    </td>
+                    <th className="px-4 py-2">Discount</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {singleStock?.map((stock, i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-[#f2f2f2]" : ""}>
+                      <td className="px-4 py-2">{stock?.stockId}</td>
+                      <td className="px-4 py-2 text-blue-700 font-semibold">
+                        {stock?.productName}
+                      </td>
+                      <td className="px-4 py-2 text-blue-700 font-semibold">
+                        {product?.weight} {product?.weightUnit}
+                      </td>
+
+                      <td className="px-4 py-2 text-blue-700 font-semibold">
+                        {stock?.costingPrice}
+                      </td>
+                      <td className="px-4 py-2 text-blue-700 font-semibold">
+                        {stock?.regularPrice}
+                      </td>
+                      <td className="md:px-4 py-2">{stock?.quantity}</td>
+                      <td className="md:px-4 py-2">{stock?.discount}</td>
+
+                      <td className="md:px-4 py-2">
+                        <div
+                          onClick={() =>
+                            document
+                              .getElementById(`my_modal_Bar${stock?.stockId}`)
+                              .showModal()
+                          }
+                          className="cursor-pointer flex gap-1 justify-between bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 text-sm"
+                        >
+                          <div>
+                            <span>Barcode</span>
+                          </div>
+                        </div>
+                        <PrintBarCode
+                          weight={product?.weight}
+                          weightUnit={product?.weightUnit}
+                          product={stock}
+                        ></PrintBarCode>
+                      </td>
+                      <td>
+                        <div
+                          onClick={() => handelDeleteStock(stock?.stockId)}
+                          className="md:px-4 py-2 cursor-pointer flex gap-1 justify-between bg-red-700 text-white  rounded hover:bg-red-800 text-sm"
+                        >
+                          Delete
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>

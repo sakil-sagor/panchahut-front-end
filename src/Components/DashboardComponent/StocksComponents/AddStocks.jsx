@@ -66,6 +66,12 @@ const AddStocks = ({ product, setReload, reload }) => {
         </div>
 
         <div>
+          <div>
+            <p className="text-center font-bold text-2xl text-sky-700 ">
+              {product?.productName} {product?.weight}
+              {product?.weightUnit}
+            </p>
+          </div>
           <div className="m-4">
             <form
               className=" border shadow-xl shadow-sky-300 p-2  rounded-md"
@@ -83,7 +89,6 @@ const AddStocks = ({ product, setReload, reload }) => {
                     <input
                       className="py-1 block  px-2 rounded-md border border-gray-300"
                       type="number"
-                      min="0"
                       name="costingPrice"
                       placeholder="Costing Price"
                       value={formData.costingPrice}
@@ -100,7 +105,6 @@ const AddStocks = ({ product, setReload, reload }) => {
                     <input
                       className="py-1 block  px-2 rounded-md border border-gray-300"
                       type="number"
-                      min="0"
                       name="regularPrice"
                       placeholder="  Regular Price"
                       value={formData.regularPrice}
@@ -117,7 +121,6 @@ const AddStocks = ({ product, setReload, reload }) => {
                     <input
                       className="py-1 block  px-2 rounded-md border border-gray-300"
                       type="number"
-                      min="0"
                       name="quantity"
                       placeholder="  quantity "
                       value={formData.quantity}
