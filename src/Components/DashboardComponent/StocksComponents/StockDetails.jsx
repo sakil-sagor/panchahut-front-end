@@ -61,7 +61,7 @@ const StockDetails = ({ product, reload, setReload }) => {
       setReload((prevReload) => prevReload + 1);
     }
   };
-  console.log(singleStock);
+
   return (
     <dialog id={`my_modal_${product?.productId}`} className="modal  fixed">
       <div className="modal-box w-11/12 max-w-5xl ">

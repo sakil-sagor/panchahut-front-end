@@ -14,8 +14,6 @@ const useProducts = () => {
   useEffect(() => {
     let url;
 
-    console.log(searchText);
-
     if (searchText) {
       url = `https://panchahut-server.vercel.app/api/v1/product/all?search=${searchText}&page=${
         page + 1

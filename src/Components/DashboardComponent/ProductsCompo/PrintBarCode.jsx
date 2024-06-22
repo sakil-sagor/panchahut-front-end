@@ -14,7 +14,7 @@ const PrintBarCode = ({ product, i, weight, weightUnit }) => {
     quantity,
     regularPrice,
   } = product;
-  console.log(product);
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -29,7 +29,7 @@ const PrintBarCode = ({ product, i, weight, weightUnit }) => {
 
         <div>
           <div
-            className="grid grid-cols-6 gap-y-4 mt-10 px-3"
+            className="grid grid-cols-7 gap-y-4 mt-10 px-3"
             ref={componentRef}
           >
             {Array.from({ length: quantity }).map((_, index) => (

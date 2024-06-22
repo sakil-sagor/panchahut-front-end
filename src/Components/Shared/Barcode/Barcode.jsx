@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 const Barcode = ({ product, weight, weightUnit }) => {
   const barcodeRef = useRef(null);
   const [totalBarcode, setTotalBarcode] = useState([]);
-  console.log(product);
+
   useEffect(() => {
     if (barcodeRef.current) {
       JsBarcode(barcodeRef.current, product?.stockId, {
@@ -31,7 +31,7 @@ const Barcode = ({ product, weight, weightUnit }) => {
       <div className="flex justify-center m-0 p-0">
         <svg className="m-0 p-0 h-[48px]" ref={barcodeRef}></svg>
       </div>
-      <p className="flex justify-center mt-[-7px] font-bold  ">
+      <p className="flex justify-center mt-[-5px] font-bold  ">
         Price: {product?.regularPrice} Tk
       </p>
     </div>

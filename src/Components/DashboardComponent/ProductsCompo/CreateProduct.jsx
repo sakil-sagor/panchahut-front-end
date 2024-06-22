@@ -92,11 +92,11 @@ const CreateProduct = () => {
           setFormData({
             // productName: "",
             // productNameBangla: "",
-            // description: "",
+            description: "",
             // productImage: "",
-            // brandName: "",
-            // category: "",
-            // subcategory: "",
+            brandName: "",
+            category: "",
+            subcategory: "",
             weight: "",
             weightUnit: "",
           });
@@ -261,7 +261,6 @@ const CreateProduct = () => {
                       <input
                         className="py-1 block  px-2 rounded-md border border-gray-300"
                         type="number"
-                        min="0"
                         required
                         name="weight"
                         placeholder="Weight"
