@@ -46,7 +46,7 @@ const SellProductPage = () => {
   // get the search product
   useEffect(() => {
     if (searchText) {
-      const url = `http://localhost:5000/api/v1/sales/${searchText}`;
+      const url = `https://panchahut-server.vercel.app/api/v1/sales/${searchText}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -67,7 +67,7 @@ const SellProductPage = () => {
     // get the product from database
 
     let newResult;
-    const url = `http://localhost:5000/api/v1/sales/salesforcountincart/${stockId}`;
+    const url = `https://panchahut-server.vercel.app/api/v1/sales/salesforcountincart/${stockId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -176,7 +176,7 @@ const SellProductPage = () => {
     };
     setLoading(true);
 
-    fetch("http://localhost:5000/api/v1/stocks/stockout", {
+    fetch("https://panchahut-server.vercel.app/api/v1/stocks/stockout", {
       method: "POST",
       headers: {
         "content-type": "application/json",

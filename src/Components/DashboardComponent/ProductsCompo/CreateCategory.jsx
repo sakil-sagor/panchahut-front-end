@@ -25,7 +25,7 @@ const CreateCategory = ({ data }) => {
 
     // Other registration form submission logic
 
-    fetch("http://localhost:5000/api/v1/category", {
+    fetch("https://panchahut-server.vercel.app/api/v1/category", {
       method: "POST",
       headers: {
         "content-type": "application/json",
