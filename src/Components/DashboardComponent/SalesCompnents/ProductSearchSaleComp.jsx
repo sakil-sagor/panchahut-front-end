@@ -1,10 +1,16 @@
 import React from "react";
 
-const ProductSearchSaleComp = ({ setSearchText, placeHolder, idName }) => {
+const ProductSearchSaleComp = ({
+  setSearchText,
+  placeHolder,
+  idName,
+  inputRef,
+}) => {
   return (
     <div>
       <div className="">
         <input
+          ref={inputRef}
           id={idName}
           placeholder={placeHolder}
           onChange={(e) => setSearchText(e.target.value)}

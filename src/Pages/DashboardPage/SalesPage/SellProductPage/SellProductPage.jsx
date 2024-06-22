@@ -22,7 +22,7 @@ const SellProductPage = () => {
   const [selectedUserCart2, setSelectedUserCart2] = useState({});
   const [selectedUserCart3, setSelectedUserCart3] = useState({});
   const [less, setLess] = useState(0);
-  const [receiveTk, seReceiveTk] = useState(0);
+  const [receiveTk, seReceiveTk] = useState(null);
   const [discountBox, setDiscountBox] = useState(false);
   const [searchText, setSearchText] = useState(0);
   const [searchResult, setSearchResult] = useState([]);
@@ -36,13 +36,21 @@ const SellProductPage = () => {
   const componentRef = useRef();
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    // Focus the input field when the component mounts
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   // get the search product
   useEffect(() => {
     if (searchText) {
-      const url = `https://panchahut-server.vercel.app/api/v1/sales/${searchText}`;
+      const url = `http://localhost:5000/api/v1/sales/${searchText}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
+          console.log(data?.data);
           setSearchResult(data?.data);
         });
     }
@@ -59,7 +67,7 @@ const SellProductPage = () => {
     // get the product from database
 
     let newResult;
-    const url = `https://panchahut-server.vercel.app/api/v1/sales/salesforcountincart/${stockId}`;
+    const url = `http://localhost:5000/api/v1/sales/salesforcountincart/${stockId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -133,17 +141,17 @@ const SellProductPage = () => {
     content: () => componentRef.current,
   });
   const handelPrinCart = () => {
-    if (!receiveTk) {
-      toast.warning("Please Take Receive Amount");
-      return;
-    }
-    setLoading(true);
     const orderdProduct = getStoredData(lastElement);
     if (orderdProduct.length <= 0) {
       toast.warning("Please add item in cart..");
       return;
     }
 
+    if (!receiveTk) {
+      toast.warning("Please Take Receive Amount");
+      return;
+    }
+    setLoading(true);
     let customerId;
     let customerPhone;
 
@@ -168,7 +176,7 @@ const SellProductPage = () => {
     };
     setLoading(true);
 
-    fetch("https://panchahut-server.vercel.app/api/v1/stocks/stockout", {
+    fetch("http://localhost:5000/api/v1/stocks/stockout", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -200,9 +208,11 @@ const SellProductPage = () => {
   return (
     <div className="p-2">
       <div className=" grid grid-cols-2 md:grid-cols-3  gap-6">
+        {/* search user phone for add user in cart  */}
         <div className="flex gap-2">
           <div>
             <ProductSearchSaleComp
+              inputRef={inputRef}
               setSearchText={setUserPhone}
               buttonRefPlus={buttonRefPlus}
               placeHolder="User Phone Number"
@@ -231,6 +241,7 @@ const SellProductPage = () => {
             )}
           </div>
         )}
+        {/* create new user for cart  */}
         <div>
           <AddNewUserSales setUserDetail={setUserDetail}></AddNewUserSales>
         </div>
