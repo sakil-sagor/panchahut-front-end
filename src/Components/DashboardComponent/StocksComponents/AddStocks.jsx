@@ -28,7 +28,7 @@ const AddStocks = ({ product, setReload, reload }) => {
       productIdNumber: product?.productId,
       productName: product?.productName,
     };
-    fetch("https://panchahut-server.vercel.app/api/v1/stocks/create", {
+    fetch("http://localhost:5000/api/v1/stocks/create", {
       method: "POST",
       headers: {
         "content-type": "application/json",

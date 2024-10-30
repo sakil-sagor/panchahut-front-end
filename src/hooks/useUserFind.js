@@ -16,7 +16,7 @@ const useUserFind = () => {
         setLoading(true);
 
         const response = await fetch(
-          `https://panchahut-server.vercel.app/api/v1/user/userDetails/${userPhone}`
+          `http://localhost:5000/api/v1/user/userDetails/${userPhone}`
         );
         const data = await response.json();
         setUserDetail({ ...data?.data, pathName: lastElement });
